@@ -1,0 +1,104 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\renewcommand{\familydefault}{\sfdefault}
+
+\geometry{letterpaper, margin=0.75in}
+\title{Stereoscopic 3D Vision: Problem Statement}
+\author{Erin Sullens, John Miller, Sam Schultz }
+
+\date{October 2016}
+\begin{document}
+\singlespacing
+\fontfamily{lmss}\selectfont
+\maketitle
+\begin{center}
+
+CS461
+
+Fall 2016
+
+Group 54
+
+Sponsor: Kevin McGrath
+
+\vspace{2in}
+{\Medium\textbf{Abstract}
+\end{center}
+\setlength{\parindent}{0cm}
+
+What if it were possible to record an entire road trip and be able to view it in 3D later on? What we intend to do with this project is take footage of road trips that are taken by two individual cameras mounted on the front of a vehicle. With the two separate video files we will be able to correlate the feeds and combine the frames into a stereoscopic image using GPS timestamps from the videos, and be able to view the resulting video in a VR headset. There are many ways in which this could be useful, from indoor bike training, to just being able to relive your favorite road trip in virtual reality. \\
+
+\vspace{.75in}
+\noindent\rule{10cm}{0.4pt} \\
+Kevin McGrath
+
+\vspace{1cm}
+\noindent\rule{10cm}{0.4pt} \\
+John Miller
+
+\vspace{1cm}
+\noindent\rule{10cm}{0.4pt} \\
+Sam Schultz
+
+\vspace{1cm}
+\noindent\rule{10cm}{0.4pt} \\
+Erin Sullens
+\newpage
+
+{\Medium\textbf{Problem Definition}}\\
+
+
+When going on a road trip, whether it be to the coast, to the mountains, or across the country, the ability to re-live that experience would be a valuable tool. In this project, we plan to take footage from road trips and convert them into a 3D video format that can be viewed on devices such as Google Cardboard, Samsung GearVR, HTC Vive, and Active 3D television. A desktop or mobile application will be created and used to process the videos and convert them into the correct format.\\ 
+
+This could be used just for entertainment purposes, but there are other applications as well. Indoor bicycle training could feel much like biking in the wilderness if the cyclist wears a VR headset and is able to view a road trip in 3D. \\
+
+\\
+
+{\Medium\textbf{Problem Solution:}}\\
+
+
+The first step in our solution consists of creating a mount that is capable of securely holding two portable cameras. The two cameras will have the capability of tracking GPS data for each video. The GPS file will be parsed into a workable format which will be used to correlate each video frame into one video feed. OpenCV offers the framework for most if not all of the technical problems presented, including video stabilization and creating a stereoscopic video feed from multiple cameras. Once the two video feeds have been successfully integrated into one stereoscopic feed it will be formatted to be played on a virtual reality headset, preferably a Vive.
+ \\
+
+
+Because it is unknown if we can stabilize the videos taken from a trip by car, we might have to start with something more simple. One idea is to take a stationary video with the two cameras, and convert that into 3D stereoscopic format. From there, we can mount the two cameras to a bicycle and move it in a straight line on smooth ground so we can have some footage that is relatively smooth. If that produces a desirable result, we can then move to capturing video by mounting the cameras on a truck and getting some road or off-road video.\\
+ 
+
+
+We also hopeful that we can work with the tech company, Garmin, because the cameras that we will most likely use will be from them. If they get on board, we might be able to have access to technology and knowledge that could help in situations such as parsing the BLOB files that currently host our GPS data.
+ \\ 
+
+{\Medium\textbf{How our solution meets the needs of the problem:}}\\
+
+Creating a stereoscopic video requires the two videos be in sync, which we will be able to achieve using the data provided. By using meta information like timestamps and GPS data that the camera stores while recording, we can correlate the video frames from each camera. \\
+
+By using OpenCV we gain access to tools which will help us implement our solution in a timely manner. If we attempted to create our own tools to handle the video transformations we would most likely not finish the project by Expo. In addition, OpenCV offers many tools which will help us not only create the video, but improve the quality of it. Video stabilization and field of vision interpolation are two of these tools.
+ \\
+
+
+
+
+{\Medium\textbf{Parameters for a complete project:}}\\
+
+The project will be considered complete when the team is able to create a new video from a mobile source, stabilize the video, transform it into stereoscopic 3D format, and view it in at least one 3D video compatible device. In addition the team will have the necessary materials to present the completed project at Expo. At minimum these include an elevator speech and a poster containing information about the project. Ideally this also includes a demo of the project and a live demonstration of the video transformation.
+\\
+
+
+{\Medium\textbf{What we will show at Expo:}}\\
+
+At Expo, we plan to show the process of our project on the poster. This could include snapshots of the videos and what the resulting image looks like in 3D, pictures of how we mounted the cameras on different vehicles, and a non-technical explanation of how we achieved our end result.\\
+
+The main feature we want to show at Expo is a VR headset that people can try on and view 3D videos. Depending on what we are able to get working, it could range from showing road trips to drone videos. If we are able to explore our stretch goals and the real-time rendering of stereoscopic videos works and isn’t very time consuming, it would be pretty impressive to be able to record footage on a bike at Expo and be able to show people how the whole process really works.
+\\
+
+{\Medium\textbf{Stretch Goals:}} \\
+
+If we are able to successfully implement our solution in the estimated time frame we have some options for additional features we can implement. We can adapt the camera mount to attach to a drone in order to get a new frame of reference for videos. Another option we can explore is real-time rendering of the stereoscopic feed on an embedded device in order to have a readily available viewable file format. Another fun addition that is possible is using the GPS data such as speed to add additional computer graphics to the video. These features could possibly allow us to have more demo options at Expo.
+
+%\section{Introduction}
+
+\end{document}
