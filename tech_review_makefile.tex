@@ -1,0 +1,370 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\usepackage{pdfpages}
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{setspace}
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\begin{flushleft}
+\Huge
+  \textbf{\@Multi-Camera Stereoscopic Vision: \\Technology Review}
+\large
+\vspace{3mm}\\
+  Erin Sullens, John Miller, Sam Schultz \\
+   \vspace{3mm}
+  CS461
+
+Fall 2016
+
+Group 54
+
+Sponsor: Kevin McGrath
+
+Group Name: ImMaculaTe Vision
+  
+\end{flushleft}\egroup
+}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[document]{ragged2e}
+\geometry{letterpaper, margin=0.75in}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\title{}
+\author{ }
+
+\date{October 2016}
+\begin{document}
+\singlespacing
+\maketitle
+\begin{center}
+\vspace{2in}
+{\Medium\textbf{Abstract}
+\end{center}
+\setlength{\parindent}{0cm}
+
+This Technology Review outlines the types of technologies that are available for specific requirements in our project, Multi-Camera Stereoscopic Vision. Each requirement has three possible technologies that can be utilized, and a description of each is provided. After describing research on all options, the technology that will work the best is selected and that will be the option that we use in our project.   \\
+\newpage
+{\Medium\textbf{Table of Contents}}\\
+\vspace{5mm}
+I. Introduction....................................................................................................................................... 2\\
+          \vspace{2mm}
+II. Technologies ................................................................................................................................... 2\\
+                 \vspace{2mm}
+
+\tab  1. User Interface of Mobile App................................................................................................ 2\\
+                 \vspace{2mm}
+
+             
+\tab 2. User Interface of Desktop App ............................................................................................ 3\\
+                 \vspace{2mm}
+\tab 3. Capture Videos .................................................................................................................... 3\\
+                 \vspace{2mm}
+                 
+\tab 4. Stabilization of Videos ......................................................................................................... 4\\
+                 \vspace{2mm}
+\tab 5. Cropping videos for similar FOV ......................................................................................... 4\\
+                 \vspace{2mm}
+                 
+\tab 6. Parsing BLOB ...................................................................................................................... 5\\
+                 \vspace{2mm}
+
+\tab 7. Correlation of Video Frames ............................................................................................... 5\\
+                 \vspace{2mm}
+
+        
+\tab 8. Viewing 3D video in VR Headset ........................................................................................ 6\\
+                 \vspace{2mm}
+                 
+\tab 9. Conversion of 2 Videos into 1 3D Video ............................................................................. 7\\
+                 \vspace{2mm}
+                 
+
+III Conclusion....................................................................................................................................... 7\\
+              \vspace{2mm}   
+IV Bibliography..................................................................................................................................... 7 \\
+                 \vspace{5mm}
+{\Medium\textbf{I Introduction}}\\
+\vspace{5mm}
+In our project, Multi-Camera Stereoscopic Vision, there are nine requirements that each need a specific technology in order to be completed to our client's specifications. In this Technology Review, we cover the different options that are available for each requirement and then decide which one will be the best suited to complete that requirement. The three of us will each take responsibility for three of the nine requirements. John will be responsible for the following: the User Interface for the Mobile App, the User Interface for the Desktop App, and the process of capturing the videos. Erin will be responsible for the following: Stabilization of the videos, Trimming the videos so they have similar FOV, and Parsing the BLOB files from the video cameras. Sam will be responsible for the following: the Correlation of video frames between the two videos, viewing the 3D video in a VR headset, and the Conversion of the two videos into one 3D video. \\
+\vspace{5mm}
+{\Medium\textbf{II Technologies}}\\
+\vspace{5mm}
+\tab {\Medium\textbf{1. User Interface of Mobile App }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}React Native, Xamarin, Android Studio\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}
+ Create a mobile application capable of running on either an android phone/tablet \tab \tab \tab or a ios phone/tablet. It does not need to be cross platform, but if it does not interfere with \tab \tab \tab  the completion of the project it could be. The purpose of the application is to provide a medium \tab \tab \tab  for the user to upload, view, and interact with video data captured by the cameras. It will also \tab \tab \tab  allow the user to instruct our algorithm to convert compatible videos into a single  \newline \tab \tab \tab stereoscopic video. If  anything goes wrong during any stage of the process, it will also serve \tab \tab \tab the purpose of giving the  user feedback telling them what happened.\\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:    }}Quality of product, resources available, ease of use for the developer, \tab \tab \tab and application appearance.\\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. React Native is an open source, cross platform, Javascript based framework developed \tab \tab \tab and maintained by Facebook. It allows the developer to write code in any combination of \tab \tab \tab javascript, objective-c, java, and swift [21]. \\
+\tab \tab \tab 2. Xamarin is a Microsoft owned company/software that allows the developer to create cross \tab \tab \tab platform applications using C#. It requires the developer to create the application in either \tab \tab \tab Xamarin Studio or Visual Studio [22].\\
+\tab \tab \tab 3. Ionic is developed and maintained by Driftyco. Ionic is another “web based” mobile \newline \tab \tab \tab application platform that allows the developer to create applications in a familiar environment. \tab \tab \tab It encourages the developer to use Angular2 along with Ionic to create the application [23].\\
+\tab \tab {\Medium\textbf{e. Discussion:  }} All three technologies have fairly strong followings, all have at least a moderate \tab \tab \tab amount of documentation, and are all actively maintained. Xamarin being proprietary (with a \tab \tab \tab paid option) doesn’t allow the developer to use their own environment [] which will make the \tab \tab \tab development process a little more intensive. Both React Native and Ionic allow the developer \tab \tab \tab to use any IDE and both allow the developer to use CSS to style the application [21].\\
+\tab \tab {\Medium\textbf{f. Best Option:   }} React Native. It is used by the facebook team for their mobile applications \newline \tab \tab \tab(Facebook app, instagram, etc.). It has strong documentation maintained by the Facebook \tab \tab \tab team and a strong community (over 40,000 stars on github [21]). One of our team members \tab \tab \tab is already familiar with React which would decrease the time necessary to learn the \newline \tab \tab \tab technology. With it’s ability to create simple components in javascript and any more complex \tab \tab \tab portions in lower level languages, it seems like a great option for the needs of this project.\\
+\vspace{5mm}
+\tab {\Medium\textbf{2. User Interface of Desktop App }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}
+ Electron with React, QT, Xamarin\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}Create a desktop application for Mac OS X, windows, or both. It’s other \newline \tab \tab \tab purposes should be the same as the mobile application with the exception of it taking full \tab \tab \tab advantage of the desktop’s/laptop’s more powerful hardware and larger storage capabilities. \\
+
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }} Quality of product, resources available, ease of use for developer, \tab \tab \tab and application appearance.  \\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. Electron with React: Both are open source technologies, electron being developed and \tab \tab \tab maintained by github [24] and React by Facebook [25]. Both have large followings with \newline \tab \tab \tab electron at 38,000 stars on github [24] and React with almost 54,000 [26]. Electron is a \newline \tab \tab \tab technology that allows the developer to create an application using web technologies and \tab \tab \tab package it into a desktop application. The desktop applications are fully cross platform, are \tab \tab \tab based off of chromium, and are capable of calling outside scripts that make use of lower \tab \tab \tab level code [24]. React is a web framework made for developing user interfaces in web \newline \tab \tab \tab applications [25].  \\
+\tab \tab \tab 2. QT: A cross platform C++ development tool used to create UIs and applications [27]. QT \tab \tab \tab is developed and maintained by the QT Project and is dual-licensed under commercial and \tab \tab \tab open source licenses with the open source license protecting developers creating other \newline \tab \tab \tab non-profit open source projects [28]. \\
+\tab \tab \tab 3. Xamarin: Microsoft owned company/software that allows the developer to create native \tab \tab \tab cross platform applications using C# [22]. 
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }}All three technologies allow the developer to create cross-platform (OS X/windows) \tab \tab \tab applications using a single code base. QT and Xamarin require the use of specific IDEs \tab \tab \tab [29][30], but seem to offer performance advantages over Electron in complex applications. QT \tab \tab \tab has been used for 20 years [27], Xamarin has over 6 years [22], and Electron has only been \tab \tab \tab around for 3 years [24]. All three technologies have reputable and highly used software build \tab \tab \tab using them. No member of the team has experience with C#, but all members have at least \tab \tab \tab experience with C++, and one team member is very familiar with web technology and react. \tab \tab \tab QT requires special QT stylesheets for editing styles [31], Xamarin requires the use of \newline \tab \tab \tab Xamarin.Forms [32] and Electron/React makes use of standard CSS [25].\\
+
+\tab \tab {\Medium\textbf{f. Best Option:   }} Client has shown lack of initial interest in Electron, so QT would is the best \newline \tab \tab \tab option.\\
+\vspace{5mm}
+\tab {\Medium\textbf{3. Capture Videos }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}Garmin Virb XE, GoPro with Altiforce GPS recorder, Garmin Virb Action Cam
+\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}Use two of the listed options to capture video and metadata about the video \tab \tab \tab (gps, timestamps). The video files and their associated metadata will be used to create a \tab \tab \tab single stereoscopic video.\\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }} Availability, cost, resolution, frames per second captured. \\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. Garmin Virb XE: Our client is already able to provide two of these cameras making them \tab \tab \tab readily available. They produce video at 60fps and 1080p quality [33] and has built in video \tab \tab \tab stabilization. This device is already owned by the client and costs 300-400 dollars for each \tab \tab \tab camera  [33]. \\
+\tab \tab \tab 2. GoPro Hero5 Black: This model of GoPro can capture video in 4k at 30fps, 2.7k at 60fps, \tab \tab \tab and 1080p at 120fps [34] and has built in video stabilization. This range of resolutions and \tab \tab \tab frame capture speeds allows a lot of flexibility for users who may experience motion sickness \tab \tab \tab when using a Virtual Reality device displaying video at a lower frame rate [35]. This device \tab \tab \tab costs 400 dollars for each camera [34]. \\
+\tab \tab \tab 3.GoPro Hero5 Session with Altiforce Sensor: Captures video at 1440 at 30fps or 1080p at \tab \tab \tab 60fps [35]. This device costs 200 dollars for each camera [34] and would have to be \newline \tab \tab \tab combined with an external gps that could mount to the camera like the Altiforce Sensor which \tab \tab \tab would add another $80-$100 to the total cost [36].
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }} The GoPro Hero5 Black with its ability to capture video at 120fps at 1080p \newline \tab \tab \tab resolution is the superior camera. The Garmin Virb XE is the most readily available device \tab \tab \tab because it is already owned by the client. It can capture frames at what should be an \newline \tab \tab \tab adequate rate, at least for development purposes. The GoPro Hero5 Session with Altiforce \tab \tab \tab Sensor is the cheapest option and can capture video at the same rate/resolution as the Garmin \tab \tab \tab Virb XE, but involves using two separate devices.\\
+\tab \tab {\Medium\textbf{f. Best Option:   }} Because of its availability, the Garmin Virb XE is the best choice for the project \tab \tab \tab during development.\\
+\vspace{5mm}
+\tab {\Medium\textbf{4. Stabilization of Videos }} \\
+\tab \tab {\Medium\textbf{a. Options:  }}OpenCV, Microsoft Cognitive Services, Vid.stab\\
+\tab \tab {\Medium\textbf{b. Goals for use: }} The goal of stabilizing the videos is to take a video that is shaky, and stabilize \tab \tab \tab it. The footage  taken is from video cameras that are mounted on the front of a truck, so they \tab \tab \tab are going to  be shaky on some level. If we don't stabilize the videos, then viewing the 3D \tab \tab \tab video in a VR headset could cause motion sickness, and it would also make the video look \tab \tab \tab cleaner and be  more pleasurable to view. \\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology we use for stabilizing the videos needs to be an API \tab \tab \tab that we can utilize that takes in a video, and outputs a stabilized video file.\\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. OpenCV has a large library of video stabilization API’s that is well suited for the \newline \tab \tab \tab stabilization that we need to accomplish. There are numerous examples of videos that have \tab \tab \tab been stabilized with OpenCV in this source [1], one of which is a road trip, which is exactly \tab \tab \tab the kind of video we need to stabilize. 
+\\
+\tab \tab \tab 2. Microsoft Cognitive Services has an API for video stabilization that takes in MP4, MOV, \tab \tab \tab and WMV video file types. The video has to be no more than 100 MB long, which could be \newline \tab \tab \tab a problem since some of the video files we will be handling are much longer [2]. This site [3] \tab \tab \tab has some examples of videos that were stabilized using this API.  \\
+\tab \tab \tab 3. Vid.stab is an API on Github for video stabilization. It is only supported on a Linux based \tab \tab \tab system, so it would only work on the desktop application and if we went with a Linux only \tab \tab \tab application [4]. Here [5] is an example of a stabilized video that used Vid.stab.
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }} All three options supply an API for video stabilization, but the technology that would \tab \tab \tab best fit our needs is OpenCV because it supports large video files, is well documented, and \tab \tab \tab supports the operating systems we are planning on using for the applications, both desktop \tab \tab \tab and mobile. \\
+\tab \tab {\Medium\textbf{f. Best Option:   }}OpenCV\\
+\vspace{5mm}
+\tab {\Medium\textbf{5. Cropping videos for similar FOV }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}OpenCV, MoviePy, FFmpeg\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}The purpose of trimming the videos so that they have a similar field of view, is \tab \tab \tab so that when the user looks to the edges of the video inside of the VR headset, the edge is \tab \tab \tab a clean line, and the videos overlap in the correct way. The videos are going to need \newline \tab \tab \tab trimming after we stabilize them because it will create a black bar at the top and bottom of \tab \tab \tab the videos. The FOV at the left and right edges of the videos are also going to be slightly \tab \tab \tab different because the video cameras are placed about five feet apart on the front of the truck. \tab \tab \tab So the technology will also have to trim the sides of both videos as well. \\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology we use for this requirement needs to be able to trim \tab \tab \tab the field of view of the videos. \\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. OpenCV provides basic editing tools such as cropping, resizing, and rotating images. We \tab \tab \tab would have to edit each frame individually, cropping off a certain amount depending on how \tab \tab \tab much black space is created from the stabilization process [6].  It is cross platform and will \tab \tab \tab work on the desktop and mobile apps. 
+\\
+\tab \tab \tab 2. MoviePy is an open source API for editing videos. It is in Python, and works on Windows, \tab \tab \tab Mac and Linux [7]. It can process common video formats. The code is on Github [8].  \\
+\tab \tab \tab 3. FFmpeg is cross platform and provides an API for manipulating videos and it handles \newline \tab \tab \tab all video types [9]. The most well documented way of cropping videos with FFmpeg is in \tab \tab \tab the form of a command line command, so if this is the technology we use, there has to be \tab \tab \tab a way to use the command line in order to crop the videos. 
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }}OpenCV is probably the best option because it is cross-platform and will work on \tab \tab \tab the desktop and mobile app. FFmpeg would be a good option because of the range of file \tab \tab \tab types that it can handle, but the use of the command line inputs could be problematic for the \tab \tab \tab mobile apps. \\
+\tab \tab {\Medium\textbf{f. Best Option:   }}OpenCV\\
+\vspace{5mm}
+\tab {\Medium\textbf{6. Parsing BLOB}}\\
+\tab \tab {\Medium\textbf{a. Options:  }}IBM BLOB Parser, Garmin-connect-export, Python library to parse ANT/Garmin.fit files. \\
+\tab \tab {\Medium\textbf{b. Goals for use: }}The BLOB we obtain from the cameras contains the GPS timestamp information \tab \tab \tab that we need in order to correlate the frames. The technology we choose for this task needs \tab \tab \tab to be able to take the BLOB files as input, parse them, and output a file that we can extract \tab \tab \tab data from in order to correlate the frames of the two videos. Without doing this, we won't be \tab \tab \tab able to convert the two videos into one 3D video. \\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology to parse the BLOB file has to decode the BLOBs \tab \tab \tab into a format that GPS data can be extracted from. It is hard to know whether any of the \tab \tab \tab technologies we have found will work because the BLOB files from the camera are not known \tab \tab \tab at this time. \\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. The IBM BLOB parser takes in a BLOB message in the form of a bit stream or message \tab \tab \tab tree and then outputs a new tree or bit stream [10]. 
+\\
+\tab \tab \tab 2. The Garmin-connect-export parser takes data from a Garmin-connect, which possibly has \tab \tab \tab the same type of GPS data as the camera we are using, since they are both from Garmin. \newline \tab \tab \tab If they are the same file type, then we might be able to use it to parse the BLOB from the \tab \tab \tab camera using it [11]. \\
+\tab \tab \tab 3. The Python library to parse ANT/Garmin.fit files could work because the BLOB files from \tab \tab \tab the cameras might be .fit files, and therefore could be parsed by this software. Not much is \tab \tab \tab known at this point if this could work [12]. 
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }}The Garmin-connect-export parser seems like it has the most potential to work \tab \tab \tab since the Garmin Connect has GPS data, like the camera does. The IBM BLOB parser is \tab \tab \tab the least likely to work, since it has nothing to do with Garmin. The Garmin.fit parser is 4 \tab \tab \tab years old, so it could not work just for that reason. So the technology we will use is the \newline \tab \tab \tab Garmin-connect-export.\\
+\tab \tab {\Medium\textbf{f. Best Option:   }}Garmin-connect-export. \\
+\vspace{5mm}
+\tab {\Medium\textbf{7. Correlation of Video Frames }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}GPS data, PIL/SciPy libraries, OpenCV\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}The purpose of this is to validate that the two videos were taken at the same \tab \tab \tab time and location.\\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The criteria being evaluated is how processing intensive each \newline \tab \tab \tab solution is as well as the difficulty of the approach.\\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. In order to validate that the video files are able to be combined into a stereoscopic 3D \tab \tab \tab video file the frames of each video must be associated with each other. There are several \tab \tab \tab solutions to this problem. The first method to solve this problem is using the gps files \newline \tab \tab \tab associated with each video file. The gps files will contain information about the time and \tab \tab \tab location as well as accelerometer data. Using this data we will be able to validate that both \tab \tab \tab video files were captured at the same time and location. Once the files have been validated \tab \tab \tab they will move to the next processing stage. This solution is our first choice and is the \newline \tab \tab \tab easiest to implement once the BLOB parser is complete. 
+\\
+\tab \tab \tab 2. The second way to solve this problem is to use PIL and SciPy python libraries to create \tab \tab \tab a measurement of similarity between the two frames. In order to validate that the two frames \tab \tab \tab were taken of the same object at the same time, a each frame will be compared on a per \tab \tab \tab pixel level. The colors will be stored in an array in order to be processed by a cross \newline \tab \tab \tab correlation function within the SciPy library. The files will be validated and moved onto the \tab \tab \tab next stage of processing if the pixel color arrays are within an acceptable difference \newline \tab \tab \tab margin of each other. This method is more computational heavy due to having to process \tab \tab \tab each frame of the video file by pixel [13].
+ \\
+\tab \tab \tab 3.  The third way to solve this problem is using OpenCV to process each of the files. OpenCV \tab \tab \tab offers object recognition capabilities which will be used to to identify the objects in each frame. \tab \tab \tab If the objects are considered the same by the OpenCV algorithm then the two files can be \tab \tab \tab assumed they were taken at the same location at the same time. Problems that may occur \tab \tab \tab with this implementation is that we have no way to verify time of the video, however it is \tab \tab \tab unlikely that two different videos taken at different times will contain the same object at the \tab \tab \tab same camera angle. The validation will be based off of this assumption [14]. 
+
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }} Using the gps data from the files will be less processing intensive while also \newline \tab \tab \tab validating all components having to do with time and location of the videos.\\
+\tab \tab {\Medium\textbf{f. Best Option:   }}GPS Data\\
+\vspace{5mm}
+\tab {\Medium\textbf{8. Viewing 3D video in VR Headset }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}HTC Dev Api, OpenCV, Direct3D Api\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}The goal is to create a suitable file format for the stereoscopic 3D video to be \tab \tab \tab played on a viewing device.\\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}Difficulty of file type conversions.\\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. The first solution to this problem is to use the HTC Dev API. The purpose of using this \newline \tab \tab \tab API is to generate the correct file format for the display device that will be used to play the \tab \tab \tab converted video. The API is already built for certain display devices such as the Vive and \tab \tab \tab SteamVR. The API has the ability to create an mpo file which can be treated as a jpg file \tab \tab \tab while being processed. This solution is simple to implement and the file types created are \tab \tab \tab very versatile and will be able to be played on any display device capable of displaying jpg \tab \tab \tab files. This solution is the most likely choice because of how easy it looks to manipulate the \tab \tab \tab end file format as well as the cross-platform capabilities of the file format [16].
+
+\\
+\tab \tab \tab 2. The second option for creating a suitable file format for the selected viewing device is \tab \tab \tab to use OpenCV. OpenCV is not as flexible with it’s options for file output, however it is \newline \tab \tab \tab capable of writing the converted video to a specified video file type using the VideoWriter \tab \tab \tab class. The class offers some flexibility when choosing the output format. However the biggest \tab \tab \tab issue I see with this approach is the lack of a specific designated stereo 3D file format. This \tab \tab \tab could mean more file processing work on our end in order to make the display file to be \tab \tab \tab used for a specific display [19].
+ \\
+\tab \tab \tab 3.  This api would be used after the converted video is created. The api has the ability to \tab \tab \tab output video files into a suitable viewing file format such as the SBS file format which is widely \tab \tab \tab used on virtual reality viewing devices. The file format contains images that are projected on \tab \tab \tab a per eye basis from the viewing device and are treated like separate video streams in order \tab \tab \tab to perform the 3D effect. This solution looks to be very applicable to our problem and \newline \tab \tab \tab will produce a file format suitable for many different viewing devices. However it may over \tab \tab \tab complicate the project to introduce an additional api just for the purpose of correcting the file \tab \tab \tab format when other api’s can do that plus other processing tasks we need [20].
+
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }}Out of all these options the HTC dev api looks like the easiest option to manipulate \tab \tab \tab the file format into the option that would work best.\\
+\tab \tab {\Medium\textbf{f. Best Option:   }}HTC Dev Api\\
+\vspace{5mm}
+\tab {\Medium\textbf{9. Conversion of 2 Videos into 1 3D Video }}\\
+\tab \tab {\Medium\textbf{a. Options:  }}OpenCV, HTC Dev Api, MeshLab\\
+\tab \tab {\Medium\textbf{b. Goals for use: }}Each of these software packages offers the ability to convert the videos into the \tab \tab \tab stereoscopic 3D format.\\
+\tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}Ease of implementation.\\
+\tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
+\tab \tab \tab 1. The first solution to merge the validated files is to use OpenCV. OpenCV contains classes \tab \tab \tab implementing stereo correspondence as well well as epipolar geometry. The stereo \newline \tab \tab \tab correspondence class uses epipolar geometry to align the two video frames into a \newline \tab \tab \tab stereoscopic frame. This will happen on a frame by frame basis which will have the end \tab \tab \tab result of creating a stereoscopic video based off of the two video files. OpenCV offers lots \tab \tab \tab of tools for working with video files as well as creating stereoscopic images and videos, this \tab \tab \tab is the solution that we will most likely choose to implement [15].
+
+\\
+\tab \tab \tab 2. The second solution to this problem is to use the HTC Dev api. This api uses \newline \tab \tab \tab a side by side technique in order to create the stereo 3D effect. The frames will already be \tab \tab \tab validated for stereo 3D creation at this point in processing. The api will create a \newline \tab \tab \tab new stereoscopic 3D file based off each video file being played for each eye. This solution \tab \tab \tab looks to be easily implementable due to the public api and that the api is designed for the \tab \tab \tab target platform we are trying create the video for [16].
+ \\
+\tab \tab \tab 3.  The third solution to this problem is to use an open source library called MeshLab. This \tab \tab \tab library offers a full toolkit for creating 3D images. The videos would be processed at a frame \tab \tab \tab by frame basis in order to combine the two frames into a stereoscopic 3D frame. This \newline \tab \tab \tab solution to the problem seems to be more complicated than the previous ones. The software \tab \tab \tab package offers a lot of capabilities that we wouldn’t need to utilize and would most likely add \tab \tab \tab to confusion while trying to implement the 3D file creation [17].
+
+
+\\
+\tab \tab {\Medium\textbf{e. Discussion:  }}OpenCV has the most robust toolset for the actual merging of the files and the API \tab \tab \tab also offers solutions to other problems in the project. Meshlab looks like it will over \newline \tab \tab \tab complicate things, and the HTC API offers everything that the OpenCV API does.\\
+\tab \tab {\Medium\textbf{f. Best Option:   }} OpenCV\\
+\vspace{5mm}
+{\Medium\textbf{III Conclusion}}\\
+\vspace{5mm}
+
+ For each of our nine requirements, we described three different technologies that could be used to complete that requirement. The best option for the UI of the mobile app is React Native. The best option for the UI of the desktop is QT. The best option for the capture of video is the Garmin Virb XE. The best option for stabilizing videos, cropping the videos, and converting two videos into one 3D video, is OpenCV. The best option for parsing BLOB files is Garmin-connect-export. The best option for correlating video frames is GPS data. The best option for viewing 3D videos in a VR headset is HTC Dev API. With these technologies we will be able to complete the requirements needed to finish our project. \\
+ \vspace{5mm}
+
+{\Medium\textbf{IV Bibliography}}\\
+\vspace{5mm}
+
+[1] NGHIAH012, 'Simple Video Stabilization Using OpenCV', 2014. [Online]. Availeble: http://nghiaho.com/?p=2093. [Accessed: 2- Nov- 2016].\\
+
+ \vspace{2mm}
+[2] ‘Video API’, 2016.  [Online]. Available: https://dev.projectoxford.ai/docs/services/565d6516778daf15800928d5/operations/565d6517778daf0978c45e35. [Accessed: 12- Nov- 2016]. \\
+ \vspace{2mm}
+
+
+[3] ‘Video API’, 2016.  [Online]. Available: https://www.microsoft.com/cognitive-services/en-us/video-api. [Accessed: 12- Nov- 2016]. \\
+ \vspace{2mm}
+
+
+[4] Martius, Georg, ‘georgmartius/vid.stab’, 2015, May 29. [Online]. Available: https://github.com/georgmartius/vid.stab. [Accessed: 12- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[5] Martius, Georg, ‘vid.stab - Transcode video stabilization plugin’. [Online]. Available: http://public.hronopik.de/vid.stab/.  [Accessed: 12- Nov- 2016]. \\ 
+
+ \vspace{2mm}
+
+[6] Rosebrock, Adrian, ‘Basic Image Manipulations in Python and OpenCV: Resizing (scaling), Rotating, and Cropping’. [Online]. Available: http://www.pyimagesearch.com/2014/01/20/basic-image-manipulations-in-python-and-opencv-resizing-scaling-rotating-and-cropping/. [Accessed: 12- Nov- 2016]. \\ 
+
+ \vspace{2mm}
+
+[7] ‘MoviePy’, 2014. [Online]. Available: http://zulko.github.io/moviepy/index.html. [Accessed: 12- Nov- 2016].  \\
+ \vspace{2mm}
+
+
+[8] Zulko, ‘Zulko/moviepy’, 2016, March 16. [Online]. Available: https://github.com/Zulko/moviepy.  [Accessed: 12- Nov- 2016]. \\ 
+ \vspace{2mm}
+
+
+[9] ‘About FFmpeg’. [Online]. Available: https://www.ffmpeg.org/about.html. [Accessed: 12- Nov- 2016].  \\
+
+ \vspace{2mm}
+
+[10] ‘BLOB parser and domain’, 2016, August 12. [Online]. Available: http://www.ibm.com/support/knowledgecenter/SSMKHH_9.0.0/com.ibm.etools.mft.doc/ac00590_.htm. [Accessed: 12- Nov- 2016].  \\
+ \vspace{2mm}
+
+
+[11] kjkjava, ‘kjkjava/garmin-connect-export’, 2015, December 22. [Online]. Available: https://github.com/kjkjava/garmin-connect-export/blob/master/gcexport.py. [Accessed: 12- Nov- 2016].  \\
+ \vspace{2mm}
+
+
+[12] dtcooper, ‘dtcooper/python-fitparse’, 2012, December 8. [Online]. Available: https://github.com/dtcooper/python-fitparse. [Accessed: 12- Nov- 2016]. \\ 
+
+ \vspace{2mm}
+
+[13] "SciPy", SciPy.org, 2016. [Online]. Available: https://docs.scipy.org/doc/scipy-0.18.1/reference/misc.html. [Accessed: 14- Nov- 2016].\\
+
+ \vspace{2mm}
+
+[14] "Features2D + Homography to find a known object — OpenCV 2.4.13.1 documentation", Docs.opencv.org, 2016. [Online]. Available: http://docs.opencv.org/2.4/doc/tutorials/features2d/feature_homography/feature_homography.html. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[15] "OpenCV: cv::stereo::StereoBinarySGBM Class Reference", Docs.opencv.org, 2016. [Online]. Available: http://docs.opencv.org/trunk/d1/d9f/classcv_1_1stereo_1_1StereoBinarySGBM.html. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[16] "Stereoscopic 3D Api Overview", HTC Dev Api, 2016. [Online]. Available: https://www.htcdev.com/devcenter/opensense-sdk/legacy-apis/stereoscopic-3d/. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[17] "VCC-3D", 3d-coform.eu, 2016. [Online]. Available: http://www.3d-coform.eu/index.php/vcc3d. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[19] "Reading and Writing Images and Video — OpenCV 2.4.13.1 documentation", Docs.opencv.org, 2016. [Online]. Available: http://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[20] "Windows 8 Direct3D stereoscopic 3D sample in C++ for Visual Studio 2013", Code.msdn.microsoft.com, 2016. [Online]. Available: https://code.msdn.microsoft.com/windowsapps/Direct3D-111-Simple-Stereo-9b2b61aa. [Accessed: 14- Nov- 2016].\\
+ \vspace{2mm}
+
+
+[21] Facebook, "Facebook/react-native," in GitHub, GitHub, 2015. [Online]. Available: https://github.com/facebook/react-native. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[22] Xamarin, "Developer Center - Xamarin,". [Online]. Available: https://developer.xamarin.com/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[23] Drifty, "Build amazing native Apps and progressive web Apps with ionic framework and angular," in ionicframework. [Online]. Available: http://ionicframework.com/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[24] GitHub, "Electron/electron," in GitHub, GitHub, 2013. [Online]. Available: https://github.com/electron/electron. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[25] Facebook, "A JavaScript library for building user interfaces - react," in GitHub. [Online]. Available: https://facebook.github.io/react/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[26] Facebook, "Facebook/react," GitHub, 2013. [Online]. Available: https://github.com/facebook/react. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[27] The QT Company, "The future is written with Qt: Cross-platform software development for embedded & desktop," in Qt, Qt, 2015. [Online]. Available: https://www.qt.io/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[28] The QT Company, "Legal | licensing," in Qt, Qt, 2014. [Online]. Available: https://www.qt.io/licensing/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[29] The QT Company, "Product | the IDE," in Qt, Qt, 2015. [Online]. Available: https://www.qt.io/ide/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[30] Xamarin, "Advanced IDE for iOS and Android," in Xamarin. [Online]. Available: https://www.xamarin.com/studio. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[31] The Qt Company, "Qt style sheets," in Qt. [Online]. Available: http://doc.qt.io/qt-4.8/stylesheet.html. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[32] Xamarin, "Styles - Xamarin," in Xamarin. [Online]. Available: https://developer.xamarin.com/guides/xamarin-forms/user-interface/styles/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[33] Garmin. ltd, "VIRB XE," in Garmin, Garmin. [Online]. Available: https://buy.garmin.com/en-US/US/prod165499.html. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[34] GoPro, "GoPro - Cameras," in GoPro. [Online]. Available: https://shop.gopro.com/cameras. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[35] L. Goodall, "Motion sickness in virtual reality and how to prevent it," in TruVision VR, TruVision VR. [Online]. Available: http://truvisionvr.com/blog/motion-sickness-in-virtual-reality-and-how-to-prevent-it/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+
+
+[36] Altiforce, "Alti-Force sensor pack - GoPro recorder video Synced data," in Altriforce, Alti-Force for GoPro video. [Online]. Available: http://www.altiforce.net/shop/info-sp22/. Accessed: Nov. 14, 2016.\\
+\end{document}
