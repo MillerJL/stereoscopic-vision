@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\sam\documents\visual studio 2015\projects\opencvstereo\opencvstereo\source.cpp(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  OpenCVStereo.vcxproj -> C:\Users\Sam\documents\visual studio 2015\Projects\OpenCVStereo\x64\Debug\OpenCVStereo.exe
+  OpenCVStereo.vcxproj -> C:\Users\Sam\documents\visual studio 2015\Projects\OpenCVStereo\x64\Debug\OpenCVStereo.pdb (Full PDB)
