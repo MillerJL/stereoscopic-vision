@@ -89,7 +89,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \vspace{5mm}
 {\Medium\textbf{II Technologies}}\\
 \vspace{5mm}
-\tab {\Medium\textbf{1. User Interface of Mobile App (John)}}\\
+\tab {\Medium\textbf{1. User Interface of Mobile App (Authorship: John Miller)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}React Native, Xamarin, Android Studio\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}
  Create a mobile application capable of running on either an android phone/tablet \tab \tab \tab or a ios phone/tablet. It does not need to be cross platform, but if it does not interfere with \tab \tab \tab  the completion of the project it could be. The purpose of the application is to provide a medium \tab \tab \tab  for the user to upload, view, and interact with video data captured by the cameras. It will also \tab \tab \tab  allow the user to instruct our algorithm to convert compatible videos into a single  \newline \tab \tab \tab stereoscopic video. If  anything goes wrong during any stage of the process, it will also serve \tab \tab \tab the purpose of giving the  user feedback telling them what happened.\\
@@ -101,7 +101,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }} All three technologies have fairly strong followings, all have at least a moderate \tab \tab \tab amount of documentation, and are all actively maintained. Xamarin being proprietary (with a \tab \tab \tab paid option) doesn’t allow the developer to use their own environment [] which will make the \tab \tab \tab development process a little more intensive. Both React Native and Ionic allow the developer \tab \tab \tab to use any IDE and both allow the developer to use CSS to style the application [21].\\
 \tab \tab {\Medium\textbf{f. Best Option:   }} React Native. It is used by the facebook team for their mobile applications \newline \tab \tab \tab(Facebook app, instagram, etc.). It has strong documentation maintained by the Facebook \tab \tab \tab team and a strong community (over 40,000 stars on github [21]). One of our team members \tab \tab \tab is already familiar with React which would decrease the time necessary to learn the \newline \tab \tab \tab technology. With it’s ability to create simple components in javascript and any more complex \tab \tab \tab portions in lower level languages, it seems like a great option for the needs of this project.\\
 \vspace{5mm}
-\tab {\Medium\textbf{2. User Interface of Desktop App (John)}}\\
+\tab {\Medium\textbf{2. User Interface of Desktop App (Authorship: John Miller)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}
  Electron with React, QT, Xamarin\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}Create a desktop application for Mac OS X, windows, or both. It’s other \newline \tab \tab \tab purposes should be the same as the mobile application with the exception of it taking full \tab \tab \tab advantage of the desktop’s/laptop’s more powerful hardware and larger storage capabilities. \\
@@ -116,7 +116,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 
 \tab \tab {\Medium\textbf{f. Best Option:   }} Client has shown lack of initial interest in Electron, so QT would is the best \newline \tab \tab \tab option.\\
 \vspace{5mm}
-\tab {\Medium\textbf{3. Capture Videos (John)}}\\
+\tab {\Medium\textbf{3. Capture Videos (Authorship: John Miller)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}Garmin Virb XE, GoPro with Altiforce GPS recorder, Garmin Virb Action Cam
 \\
 \tab \tab {\Medium\textbf{b. Goals for use: }}Use two of the listed options to capture video and metadata about the video \tab \tab \tab (gps, timestamps). The video files and their associated metadata will be used to create a \tab \tab \tab single stereoscopic video.\\
@@ -130,7 +130,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }} The GoPro Hero5 Black with its ability to capture video at 120fps at 1080p \newline \tab \tab \tab resolution is the superior camera. The Garmin Virb XE is the most readily available device \tab \tab \tab because it is already owned by the client. It can capture frames at what should be an \newline \tab \tab \tab adequate rate, at least for development purposes. The GoPro Hero5 Session with Altiforce \tab \tab \tab Sensor is the cheapest option and can capture video at the same rate/resolution as the Garmin \tab \tab \tab Virb XE, but involves using two separate devices.\\
 \tab \tab {\Medium\textbf{f. Best Option:   }} Because of its availability, the Garmin Virb XE is the best choice for the project \tab \tab \tab during development.\\
 \vspace{5mm}
-\tab {\Medium\textbf{4. Stabilization of Videos (Erin)}} \\
+\tab {\Medium\textbf{4. Stabilization of Videos (Authorship: Erin Sullens)}} \\
 \tab \tab {\Medium\textbf{a. Options:  }}OpenCV, Microsoft Cognitive Services, Vid.stab\\
 \tab \tab {\Medium\textbf{b. Goals for use: }} The goal of stabilizing the videos is to take a video that is shaky, and stabilize \tab \tab \tab it. The footage  taken is from video cameras that are mounted on the front of a truck, so they \tab \tab \tab are going to  be shaky on some level. If we don't stabilize the videos, then viewing the 3D \tab \tab \tab video in a VR headset could cause motion sickness, and it would also make the video look \tab \tab \tab cleaner and be  more pleasurable to view. \\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology we use for stabilizing the videos needs to be an API \tab \tab \tab that we can utilize that takes in a video, and outputs a stabilized video file.\\
@@ -144,7 +144,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }} All three options supply an API for video stabilization, but the technology that would \tab \tab \tab best fit our needs is OpenCV because it supports large video files, is well documented, and \tab \tab \tab supports the operating systems we are planning on using for the applications, both desktop \tab \tab \tab and mobile. \\
 \tab \tab {\Medium\textbf{f. Best Option:   }}OpenCV\\
 \vspace{5mm}
-\tab {\Medium\textbf{5. Cropping videos for similar FOV (Erin)}}\\
+\tab {\Medium\textbf{5. Cropping videos for similar FOV (Authorship: Erin Sullens)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}OpenCV, MoviePy, FFmpeg\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}The purpose of trimming the videos so that they have a similar field of view, is \tab \tab \tab so that when the user looks to the edges of the video inside of the VR headset, the edge is \tab \tab \tab a clean line, and the videos overlap in the correct way. The videos are going to need \newline \tab \tab \tab trimming after we stabilize them because it will create a black bar at the top and bottom of \tab \tab \tab the videos. The FOV at the left and right edges of the videos are also going to be slightly \tab \tab \tab different because the video cameras are placed about five feet apart on the front of the truck. \tab \tab \tab So the technology will also have to trim the sides of both videos as well. \\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology we use for this requirement needs to be able to trim \tab \tab \tab the field of view of the videos. \\
@@ -158,21 +158,22 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }}OpenCV is probably the best option because it is cross-platform and will work on \tab \tab \tab the desktop and mobile app. FFmpeg would be a good option because of the range of file \tab \tab \tab types that it can handle, but the use of the command line inputs could be problematic for the \tab \tab \tab mobile apps. \\
 \tab \tab {\Medium\textbf{f. Best Option:   }}OpenCV\\
 \vspace{5mm}
-\tab {\Medium\textbf{6. Parsing BLOB (Erin)}}\\
-\tab \tab {\Medium\textbf{a. Options:  }}IBM BLOB Parser, Garmin-connect-export, Python library to parse ANT/Garmin.fit files. \\
+\tab {\Medium\textbf{6. Parsing BLOB (Authorship: Erin Sullens)}}\\
+\tab \tab {\Medium\textbf{a. Options:  }}IBM BLOB Parser, Garmin-connect-export, Python library to parse ANT/Garmin.fit files, ANT SDK. \\
 \tab \tab {\Medium\textbf{b. Goals for use: }}The BLOB we obtain from the cameras contains the GPS timestamp information \tab \tab \tab that we need in order to correlate the frames. The technology we choose for this task needs \tab \tab \tab to be able to take the BLOB files as input, parse them, and output a file that we can extract \tab \tab \tab data from in order to correlate the frames of the two videos. Without doing this, we won't be \tab \tab \tab able to convert the two videos into one 3D video. \\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The technology to parse the BLOB file has to decode the BLOBs \tab \tab \tab into a format that GPS data can be extracted from. It is hard to know whether any of the \tab \tab \tab technologies we have found will work because the BLOB files from the camera are not known \tab \tab \tab at this time. \\
 \tab \tab {\Medium\textbf{d. Comparison of technologies: }}\\
 \tab \tab \tab 1. The IBM BLOB parser takes in a BLOB message in the form of a bit stream or message \tab \tab \tab tree and then outputs a new tree or bit stream [10]. 
 \\
 \tab \tab \tab 2. The Garmin-connect-export parser takes data from a Garmin-connect, which possibly has \tab \tab \tab the same type of GPS data as the camera we are using, since they are both from Garmin. \newline \tab \tab \tab If they are the same file type, then we might be able to use it to parse the BLOB from the \tab \tab \tab camera using it [11]. \\
-\tab \tab \tab 3. The Python library to parse ANT/Garmin.fit files could work because the BLOB files from \tab \tab \tab the cameras might be .fit files, and therefore could be parsed by this software. Not much is \tab \tab \tab known at this point if this could work [12]. 
+\tab \tab \tab 3. The Python library to parse ANT/Garmin.fit files could work because the BLOB files from \tab \tab \tab the cameras might be .fit files, and therefore could be parsed by this software. Not much is \tab \tab \tab known at this point if this could work [12]. \\
+\tab\tab\tab 4. The ANT SDK that we found later on is an SDK by ANT that parses Garmin fit files. This \tab \tab \tab took some time to figure out how to use correctly, and some modifications had to be made \tab \tab \tab but it works now, so we are able to access the metadata from the Garmin cameras [37]. 
 
 \\
-\tab \tab {\Medium\textbf{e. Discussion:  }}The Garmin-connect-export parser seems like it has the most potential to work \tab \tab \tab since the Garmin Connect has GPS data, like the camera does. The IBM BLOB parser is \tab \tab \tab the least likely to work, since it has nothing to do with Garmin. The Garmin.fit parser is 4 \tab \tab \tab years old, so it could not work just for that reason. So the technology we will use is the \newline \tab \tab \tab Garmin-connect-export.\\
-\tab \tab {\Medium\textbf{f. Best Option:   }}Garmin-connect-export. \\
+\tab \tab {\Medium\textbf{e. Discussion:  }}None of the technologies that I previously researched worked for parsing the BLOB \tab \tab \tab files, but when we found the ANT SDK and got it working, we decided to use it instead. \\
+\tab \tab {\Medium\textbf{f. Best Option:   }}ANT SDK \\
 \vspace{5mm}
-\tab {\Medium\textbf{7. Correlation of Video Frames (Sam)}}\\
+\tab {\Medium\textbf{7. Correlation of Video Frames (Authorship: Sam Schultz)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}GPS data, PIL/SciPy libraries, OpenCV\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}The purpose of this is to validate that the two videos were taken at the same \tab \tab \tab time and location.\\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}The criteria being evaluated is how processing intensive each \newline \tab \tab \tab solution is as well as the difficulty of the approach.\\
@@ -188,7 +189,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }} Using the gps data from the files will be less processing intensive while also \newline \tab \tab \tab validating all components having to do with time and location of the videos.\\
 \tab \tab {\Medium\textbf{f. Best Option:   }}GPS Data\\
 \vspace{5mm}
-\tab {\Medium\textbf{8. Viewing 3D video in VR Headset (Sam)}}\\
+\tab {\Medium\textbf{8. Viewing 3D video in VR Headset (Authorship: Sam Schultz)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}HTC Dev Api, OpenCV, Direct3D Api\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}The goal is to create a suitable file format for the stereoscopic 3D video to be \tab \tab \tab played on a viewing device.\\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}Difficulty of file type conversions.\\
@@ -205,7 +206,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 \tab \tab {\Medium\textbf{e. Discussion:  }}Out of all these options OpenCV looks has proven to be the easiest option to manipulate \tab \tab \tab the file format into the option that would work best.\\
 \tab \tab {\Medium\textbf{f. Best Option:   }}OpenCV\\
 \vspace{5mm}
-\tab {\Medium\textbf{9. Conversion of 2 Videos into 1 3D Video (Sam)}}\\
+\tab {\Medium\textbf{9. Conversion of 2 Videos into 1 3D Video (Authorship: Sam Schultz)}}\\
 \tab \tab {\Medium\textbf{a. Options:  }}OpenCV, HTC Dev Api, MeshLab\\
 \tab \tab {\Medium\textbf{b. Goals for use: }}Each of these software packages offers the ability to convert the videos into the \tab \tab \tab stereoscopic 3D format.\\
 \tab \tab {\Medium\textbf{c. Criteria being evaluated:   }}Ease of implementation.\\
@@ -367,4 +368,7 @@ In our project, Multi-Camera Stereoscopic Vision, there are nine requirements th
 
 
 [36] Altiforce, "Alti-Force sensor pack - GoPro recorder video Synced data," in Altriforce, Alti-Force for GoPro video. [Online]. Available: http://www.altiforce.net/shop/info-sp22/. Accessed: Nov. 14, 2016.\\
+ \vspace{2mm}
+ [37] ‘FIT SDK 20.22.00’, 2017. [Online]. Available:
+https://www.thisisant.com/resources/fit. [Accessed: 14- Feb- 2017].
 \end{document}
