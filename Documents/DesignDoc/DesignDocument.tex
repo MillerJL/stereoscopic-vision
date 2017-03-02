@@ -23,7 +23,7 @@ Group 54
 Sponsor: Kevin McGrath
 
 Group Name: ImMaculaTe Vision
-  
+
 \end{flushleft}\egroup
 }
 \renewcommand{\familydefault}{\sfdefault}
@@ -82,7 +82,7 @@ Erin Sullens\tab \tab \tab \tab \tab \tab \tab \tab \hspace{5.5mm}Date
                  \vspace{2mm}
 
    \tab 1.3 Overview ............................................................................................................................. 2\\
-                   
+
                  \vspace{2mm}
 \tab 1.4 Authorship ........................................................................................................................... 3\\
 \vspace{2mm}
@@ -96,7 +96,7 @@ Erin Sullens\tab \tab \tab \tab \tab \tab \tab \tab \hspace{5.5mm}Date
                  \vspace{2mm}
 
 
-                
+
 \tab 2.1 Stakeholders and their concerns......................................................................................... 3\\
                  \vspace{2mm}
 \tab 2.2 Context Viewpoint................................................................................................................ 4\\
@@ -111,12 +111,12 @@ Erin Sullens\tab \tab \tab \tab \tab \tab \tab \tab \hspace{5.5mm}Date
                  \vspace{2mm}
 \tab 2.7 Structure Viewpoint ............................................................................................................ 11\\
                  \vspace{2mm}
-                 
+
 \tab 2.8 Interaction Viewpoint .......................................................................................................... 13\\
                  \vspace{2mm}
 \tab 2.9 State Dynamics Viewpoint ................................................................................................. 13\\
                  \vspace{2mm}
-                 
+
 \tab 2.10 Algorithm Viewpoint ......................................................................................................... 13\\
                  \vspace{2mm}
 
@@ -133,7 +133,7 @@ Erin Sullens\tab \tab \tab \tab \tab \tab \tab \tab \hspace{5.5mm}Date
 {\Medium\textbf{1.1 Purpose}}\\
 \vspace{5mm}
 
-The purpose of this SDD is to plan out how all project entities work together and how we will develop the project. The intended audience of this document is the sponsor of this project, and the development team.\\ 
+The purpose of this SDD is to plan out how all project entities work together and how we will develop the project. The intended audience of this document is the sponsor of this project, and the development team.\\
 \vspace{5mm}
 {\Medium\textbf{1.2 Scope}}\\
 \vspace{5mm}
@@ -206,7 +206,7 @@ The system will interact with the user through multiple application user interfa
 \vspace{5mm}
 Use Case Diagram depicting how the user interacts with the applications:\\
 \vspace{2mm}
-\includegraphics[scale=.4]{UCD.png}
+\includegraphics[scale=.4]{images/UCD.png}
 \vspace{5mm}
 
 {\Medium\textbf{2.3 Composition Viewpoint}}\\
@@ -222,7 +222,7 @@ The role of this process is to extract GPS timestamp data from the BLOB file pro
 \vspace{3mm}
 
  The role of this process is to take the two videos as input, and output two stabilized videos. For this process, we found functions in the OpenCV library that we will utilize [2]. \\
- 
+
  \vspace{5mm}
 2.3.3 Cropping the videos\\
 \vspace{3mm}
@@ -233,21 +233,21 @@ The role of this process is to crop the videos so that both videos have equal fi
 2.3.4 Correlating the frames of the two videos\\
 \vspace{3mm}
 
-The purpose of this process is to correlate the frames of the videos using the GPS time stamp data from the BLOB files. This will make it possible to convert the videos into one stereoscopic 3D video. 
+The purpose of this process is to correlate the frames of the videos using the GPS time stamp data from the BLOB files. This will make it possible to convert the videos into one stereoscopic 3D video.
  \\
  \vspace{5mm}
 \newpage
 2.3.5 Converting two videos into one stereoscopic 3D video\\
 \vspace{3mm}
 
-The purpose of this process is to output the final video in the correct format to view a stereoscopic video in a VR headset. The software we chose to do this process is OpenCV [4].   
+The purpose of this process is to output the final video in the correct format to view a stereoscopic video in a VR headset. The software we chose to do this process is OpenCV [4].
  \\
 \vspace{5mm}
 
 {\Medium\textbf{2.4 Dependency Viewpoint}}\\
 \vspace{5mm}
 
-\includegraphics[scale=.8]{dependencyDiagram.PNG}\\
+\includegraphics[scale=.8]{images/dependencyDiagram.PNG}\\
 Dependency of processes on other processes. \\
 \vspace{5mm}
 {\Medium\textbf{2.5 Patterns use Viewpoint}}\\
@@ -259,26 +259,26 @@ We will be utilizing the MVC software design pattern for the applications. \\
 Viewpoint}}\\
 \vspace{5mm}
 
-\includegraphics[scale=.8]{interface.PNG}\\
+\includegraphics[scale=.8]{images/interface.PNG}\\
 \vspace{5mm}
 \textbf{2.6.1 Process1: User selects video files to be processed:}\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img1.png}\\
+\includegraphics[scale=.47]{images/img1.png}\\
 2.6.1.1 User is at My Videos page [7]
 
-\includegraphics[scale=.47]{img2.png}\\
+\includegraphics[scale=.47]{images/img2.png}\\
 2.6.1.2 User clicks New Video button [7]\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img3.png}\\
+\includegraphics[scale=.47]{images/img3.png}\\
 2.6.1.3 User provides two videos stored on devices file system, gives the video a name, and clicks the Confirm button [7]\\
 \vspace{5mm}
 \newpage
 \textbf{2.6.2 Process2: User selects portion of video files to process:}\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img4.png}\\
+\includegraphics[scale=.47]{images/img4.png}\\
 2.6.2.1 User clicks Yes to edit video [7]\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img5.png}\\
+\includegraphics[scale=.47]{images/img5.png}\\
 2.6.2.2 Users makes use of video resizing tools to pick a subsection of video to process [7]\\
 \vspace{5mm}
 \textbf{2.6.3 Process3: Select already processed files:}\\
@@ -286,22 +286,22 @@ Viewpoint}}\\
 
 2.6.3.1 User is at My Videos page: See 2.6.1.1\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img6.png}\\
+\includegraphics[scale=.47]{images/img6.png}\\
 2.6.3.2 User navigates to Commute folder and selects desired video [7]\\
 \vspace{5mm}
 \newpage
 \textbf{2.6.4 Process4: Export processed file:}\\
 \vspace{5mm}
 
-\includegraphics[scale=.47]{img7.png}\\
+\includegraphics[scale=.47]{images/img7.png}\\
 2.6.4.1 User clicks menu expansion button and clicks Export option [7]\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img8.png}\\
+\includegraphics[scale=.47]{images/img8.png}\\
 2.6.4.1 User chooses file format to export as and clicks Export button [7]\\
 \vspace{5mm}
 \textbf{2.6.5 Process4: Select subsection of processed file:}\\
 \vspace{5mm}
-\includegraphics[scale=.47]{img9.png}\\
+\includegraphics[scale=.47]{images/img9.png}\\
 2.6.5.2 Users makes use of video resizing tools to pick a subsection of video to process [7]\\
 \vspace{5mm}
 
@@ -310,28 +310,28 @@ Viewpoint}}\\
 
 {\Medium\textbf{2.7 Structure Viewpoint}}\\
 \vspace{5mm}
-UML Class Diagrams for the different processes:\\ 
+UML Class Diagrams for the different processes:\\
 \vspace{5mm}
 2.7.1 File Upload\\
 \vspace{3mm}
-\includegraphics[scale=.8]{FileManipClassDiagram.png}\\
+\includegraphics[scale=.8]{images/FileManipClassDiagram.png}\\
 \vspace{5mm}
 \newpage
 2.7.2 Converting Videos\\
 \vspace{3mm}
-\includegraphics[scale=.8]{convertVideo.png}\\
+\includegraphics[scale=.8]{images/convertVideo.png}\\
 \vspace{5mm}
 2.7.3 Parse BLOB\\
 \vspace{3mm}
-\includegraphics[scale=.8]{BLOB.png}\\
+\includegraphics[scale=.8]{images/BLOB.png}\\
 \vspace{5mm}
 2.7.4 Correlate Frames\\
 \vspace{3mm}
-\includegraphics[scale=.8]{CorralateFrameDiagram.png}\\
+\includegraphics[scale=.8]{images/CorralateFrameDiagram.png}\\
 \vspace{5mm}
 2.7.5 Crop Videos\\
 \vspace{3mm}
-\includegraphics[scale=.8]{crop.png}\\
+\includegraphics[scale=.8]{images/crop.png}\\
 \vspace{5mm}
 \newpage
 {\Medium\textbf{2.8 Interaction Viewpoint}}\\
@@ -353,7 +353,7 @@ These are how the components of the system will be related and interact with eac
 \vspace{5mm}
 A State Diagram depicting the flow of data through our system: [6]\\
 \vspace{5mm}
-\includegraphics[scale=.7]{statediagram.PNG}\\
+\includegraphics[scale=.7]{images/statediagram.PNG}\\
 \vspace{5mm}
 
 {\Medium\textbf{2.10 Algorithm Viewpoint}}\\
@@ -401,7 +401,7 @@ A State Diagram depicting the flow of data through our system: [6]\\
 \tab \tab ii. Find first frame before post, called pre. \\
 \vspace{3mm}
 
-\tab \tab iii. Compare difference between start and post and start and pre.\\ 
+\tab \tab iii. Compare difference between start and post and start and pre.\\
 \vspace{3mm}
 
 \tab \tab iv. Smallest timestamp difference found will decide which frame to treat as start of second camera.\\
@@ -418,6 +418,6 @@ A State Diagram depicting the flow of data through our system: [6]\\
 
 {\Large\textbf{3 Conclusion}}\\
 \vspace{5mm}
-In this Software Design Document, we described how we are going to be developing our software, and how all of the components and processes work together. The main part of the system will be composed of several processes and the data flows through the system as follows: The user uploads two videos to the application and begins the conversion process. The videos get stabilized and cropped, then the frames are correlated, and then the two videos get converted into the stereoscopic format. The video is then exported so the user can view the video in a VR headset. 
+In this Software Design Document, we described how we are going to be developing our software, and how all of the components and processes work together. The main part of the system will be composed of several processes and the data flows through the system as follows: The user uploads two videos to the application and begins the conversion process. The videos get stabilized and cropped, then the frames are correlated, and then the two videos get converted into the stereoscopic format. The video is then exported so the user can view the video in a VR headset.
 
 \end{document}
