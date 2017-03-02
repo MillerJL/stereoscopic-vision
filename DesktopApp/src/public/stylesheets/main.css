@@ -1,0 +1,94 @@
+/* Layout */
+html, body {
+  margin: 0;
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
+.App {
+  display: flex;
+  flex-direction: row;
+}
+.Content {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column
+}
+.ContentMain {
+  height: 100%;
+  margin-top: 20px;
+  padding: 10px
+}
+.Left {
+  margin-right: 5px;
+}
+.Right {
+  margin-left: 5px;
+}
+
+/* * * * Upload Page * * * */
+/* Dropzone */
+.DropZoneContainer {
+  display: flex;
+  flex-basis: 50%;
+  margin-bottom: 10px;
+}
+.DropZonePaper {
+  display: flex;
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+.DropZoneUpload {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  background: #E0E0E0;
+}
+.DropZoneUpload:hover {
+  cursor: pointer;
+  background: #BDBDBD;
+}
+.DropZoneUploadActive {
+  background: #BDBDBD;
+}
+.DropZoneText {
+  display: flex;
+  flex-basis: 100%;
+  flex-grow: 1;
+  padding: 20px;
+  justify-content: center;
+}
+/* File Lists */
+.FileList {
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+}
+.CardDeleteButton {
+  display: flex;
+  flex-basis: 10%;
+  margin-right: 0px;
+  justify-content: center;
+  align-items: center;
+}
+/* Page Layout */
+.UploadContainer {
+  display: flex;
+  flex-basis: 100%;
+  min-height: 100%;
+  flex-direction: column;
+}
+/* Bottom Buttons */
+.ButtonRow {
+  display: flex;
+  margin-top: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.ButtonRowButton {
+  display: flex;
+  align-self: flex-end;
+}

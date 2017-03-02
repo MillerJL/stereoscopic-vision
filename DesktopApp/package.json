@@ -1,0 +1,33 @@
+{
+  "name": "DesktopApp",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "react-scripts": "0.8.5",
+    "redux-logger": "^2.8.1"
+  },
+  "dependencies": {
+    "file-type": "^4.1.0",
+    "material-ui": "^0.16.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-dropzone": "^3.10.0",
+    "react-redux": "^5.0.2",
+    "react-router": "^3.0.2",
+    "react-router-redux": "^4.0.7",
+    "react-tap-event-plugin": "^2.0.1",
+    "read-chunk": "^2.0.0",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.1",
+    "redux-thunk": "^2.2.0"
+  },
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron ."
+  }
+}
