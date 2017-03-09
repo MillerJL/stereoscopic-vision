@@ -18,7 +18,7 @@ html, body {
 }
 .ContentMain {
   height: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px
 }
 .Left {
@@ -28,7 +28,25 @@ html, body {
   margin-left: 5px;
 }
 
-/* * * * Upload Page * * * */
+/* * * * * * * * * * * Side Menu * * * * * * * * * * * * /
+/* Page Layout */
+.SideMenuContainer {
+  display: flex;
+  flex-direction: column;
+  width: 347px;
+  padding: 20px 0px 20px 20px;
+}
+
+/* Menu*/
+.SideMenuLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 63px;
+  margin-bottom: 10px;
+}
+
+/* * * * * * * * * * * Upload Page * * * * * * * * * * * /
 /* Dropzone */
 .DropZoneContainer {
   display: flex;
@@ -79,6 +97,11 @@ html, body {
   flex-basis: 100%;
   min-height: 100%;
   flex-direction: column;
+}
+.StepperContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 /* Bottom Buttons */
 .ButtonRow {

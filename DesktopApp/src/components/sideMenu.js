@@ -1,7 +1,6 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye'
 import UploadFile from 'material-ui/svg-icons/file/file-upload'
 import VideoLibrary from 'material-ui/svg-icons/av/video-library'
 import Divider from 'material-ui/Divider'
@@ -12,11 +11,12 @@ import MenuItem from 'material-ui/MenuItem'
 import { Link } from 'react-router'
 
 const sideMenu = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', width: '347px', padding: '20px 0px 20px 20px' }}>
-    <Paper>
+  <div className='SideMenuContainer'>
+    <Paper zDepth={2} className='SideMenuLogo'>
+      <h2>* PLACEHOLDER *</h2>
+    </Paper>
+    <Paper zDepth={2}>
       <Menu>
-        <MenuItem primaryText='Stereoscopic Vision' leftIcon={<RemoveRedEye />} />
-        <Divider />
         <Link to='/' style={{ textDecoration: 'none' }} activeStyle={{ background: 'red' }}>
           <MenuItem primaryText='Videos' leftIcon={<VideoLibrary />} />
         </Link>

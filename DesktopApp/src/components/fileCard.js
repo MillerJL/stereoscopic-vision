@@ -4,12 +4,14 @@ import FileFolder from 'material-ui/svg-icons/file/folder'
 import Videocam from 'material-ui/svg-icons/av/videocam'
 import GpsFixed from 'material-ui/svg-icons/device/gps-fixed'
 import Delete from 'material-ui/svg-icons/action/delete'
-import { Card, CardHeader, CardText, CardActions } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import {
+  Card,
+  CardHeader
+} from 'material-ui/Card'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
 
-const appBar = ({ file, index }) => {
+const fileCard = ({ file, index, onDelete, side }) => {
   let icon
 
   switch (file.type) {
@@ -21,6 +23,8 @@ const appBar = ({ file, index }) => {
       break
     case 'fit':
       icon = <Avatar icon={<GpsFixed />} />
+      break
+    default:
       break
   }
 
@@ -34,12 +38,14 @@ const appBar = ({ file, index }) => {
         />
       </Card>
       <div className='CardDeleteButton'>
-        <IconButton>
-          <Delete />
-        </IconButton>
+        <Paper style={{ display: 'flex', flexBasis: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+          <IconButton>
+            <Delete onClick={() => onDelete(side, index)} hoverColor='#B71C1C' />
+          </IconButton>
+        </Paper>
       </div>
     </div>
   )
 }
 
-export default appBar
+export default fileCard
