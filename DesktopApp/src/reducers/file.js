@@ -15,12 +15,7 @@ export default function file (state = initialState, action = {}) {
         ...state,
         leftFileList: [
           ...state.leftFileList,
-          {
-            name: payload.name,
-            path: payload.path,
-            size: payload.fileSize,
-            type: payload.fileType
-          }
+          action.payload
         ]
       }
     case types.REMOVELEFTFILE:
@@ -36,12 +31,7 @@ export default function file (state = initialState, action = {}) {
         ...state,
         rightFileList: [
           ...state.rightFileList,
-          {
-            name: payload.name,
-            path: payload.path,
-            size: payload.fileSize,
-            type: payload.fileType
-          }
+          action.payload
         ]
       }
     case types.REMOVERIGHTFILE:

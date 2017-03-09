@@ -19,7 +19,7 @@ class CounterApp extends Component {
           <SideMenu />
           <div className='Content'>
             <AppBarComponent />
-            <Paper className='ContentMain'>
+            <Paper className='ContentMain' zDepth={2}>
               {content}
             </Paper>
           </div>
