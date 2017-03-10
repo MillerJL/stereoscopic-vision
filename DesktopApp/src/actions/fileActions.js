@@ -17,8 +17,7 @@ export function validateAddFile ({ files, side }) {
     let errors = []
 
     files.forEach(file => {
-      let error
-      if (error) console.log('ayy lmao')
+      let error = []
       const state = getState()
       const payload = {
         name: file.name,
@@ -32,29 +31,29 @@ export function validateAddFile ({ files, side }) {
         : state.file.rightFileList
 
       if (fileSide.length + 1 > 2) {
-        error = {
+        error.push({
           message: 'Only a .fit and video file are required for each side',
           file: file.name
-        }
+        })
       }
       if (fileSide.map(item => { return item.type }).includes(payload.type)) {
-        error = {
+        error.push({
           message: 'You have already selected a ' + payload.type + ' file',
           file: file.name
-        }
+        })
       } else if (!['video', 'fit'].includes(payload.type)) {
-        error = {
+        error.push({
           message: 'File type ' + payload.type + ' is not allowed',
           file: file.name
-        }
+        })
       }
 
-      if (!error) {
+      if (!error.length) {
         (side === 'left')
           ? dispatch(addLeftFile(file, payload))
           : dispatch(addRightFile(file, payload))
       } else {
-        errors.push(error)
+        errors.push(...error)
       }
     })
     if (errors.length > 0) {
