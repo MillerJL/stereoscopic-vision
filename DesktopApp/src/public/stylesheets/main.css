@@ -115,3 +115,19 @@ html, body {
   display: flex;
   align-self: flex-end;
 }
+
+/* * * * * * * * * * * * Edit Page * * * * * * * * * * * /
+/* Page Layout */
+.EditContainer {
+  display: flex;
+  flex-basis: 100%;
+  min-height: 100%;
+  flex-direction: column;
+}
+.DirectorySelect {
+  display: flex;
+}
+.DirectorySelect:hover {
+  cursor: pointer;
+  color: #039BE5;
+}

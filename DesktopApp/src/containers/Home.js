@@ -1,5 +1,5 @@
 import React from 'react'
-import {GridList, GridTile} from 'material-ui/GridList'
+import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import Subheader from 'material-ui/Subheader'
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu'

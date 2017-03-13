@@ -1,7 +1,13 @@
 import * as types from '../actions'
 
 const initialState = {
-  stepper: 0
+  stepper: 0,
+  nextStep: {
+    enabled: false
+  },
+  previousStep: {
+    enabled: false
+  }
 }
 
 export default function uploadPage (state = initialState, action = {}) {

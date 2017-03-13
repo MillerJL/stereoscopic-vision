@@ -5,12 +5,11 @@ import Dropzone from 'react-dropzone'
 import Paper from 'material-ui/Paper'
 import * as fileActions from '../actions/fileActions'
 import * as errorActions from '../actions/errorActions'
+import * as uploadPageActions from '../actions/uploadPageActions'
 import FileCard from '../components/fileCard'
 import Stepper from '../components/stepper'
-import IconButton from 'material-ui/IconButton'
-import RightArrow from 'material-ui/svg-icons/navigation/arrow-forward'
-import LeftArrow from 'material-ui/svg-icons/navigation/arrow-back'
 import ErrorAlert from '../components/errorAlert'
+import BottomButtons from '../components/bottomButtons'
 import {
   steps
 } from '../constants'
@@ -44,6 +43,7 @@ class Upload extends Component {
       fileState,
       errorState,
       uploadPageState,
+      uploadPageActions,
       errorActions
     } = this.props
 
@@ -102,18 +102,20 @@ class Upload extends Component {
           </div>
         </div>
 
-        <div className='ButtonRow'>
-          <div className='ButtonRowButton'>
-            <IconButton tooltip='top-center' tooltipPosition='top-center' disabled>
-              <LeftArrow />
-            </IconButton>
-          </div>
-          <div className='ButtonRowButton'>
-            <IconButton tooltip='Edit Video' tooltipPosition='top-center' disabled>
-              <RightArrow />
-            </IconButton>
-          </div>
-        </div>
+        <BottomButtons
+          leftArrow={{
+            step: () => uploadPageActions.changeStepper(0),
+            nav: '/',
+            tooltip: 'Home',
+            disabled: false
+          }}
+          rightArrow={{
+            step: () => uploadPageActions.changeStepper(1),
+            nav: '/Edit',
+            tooltip: 'Edit',
+            disabled: false
+          }}
+        />
 
         <ErrorAlert
           toggleErrorAlert={errorActions.toggleErrorAlert}
@@ -136,7 +138,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     fileActions: bindActionCreators(fileActions, dispatch),
-    errorActions: bindActionCreators(errorActions, dispatch)
+    errorActions: bindActionCreators(errorActions, dispatch),
+    uploadPageActions: bindActionCreators(uploadPageActions, dispatch)
   }
 }
 

@@ -10,6 +10,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import Home from './containers/Home'
 import Upload from './containers/Upload'
+import Edit from './containers/Edit'
 import App from './containers/App'
 import * as reducers from './reducers'
 injectTapEventPlugin()
@@ -29,6 +30,7 @@ render(
       <Route path='/' component={App}>
         <IndexRoute components={{ content: Home }} />
         <Route path='upload' components={{ content: Upload }} />
+        <Route path='edit' components={{ content: Edit }} />
       </Route>
     </Router>
   </Provider>,
