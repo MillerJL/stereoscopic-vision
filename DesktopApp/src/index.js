@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import Home from './containers/Home'
@@ -16,13 +16,14 @@ import * as reducers from './reducers'
 injectTapEventPlugin()
 
 const middleware = [thunk]
-if (process.env.NODE_ENV !== 'production') middleware.push(createLogger())
+// if (process.env.NODE_ENV !== 'production') middleware.push(createLogger())
+middleware.push(createLogger())
 const reducer = combineReducers({
   ...reducers,
   routing: routerReducer
 })
 const store = createStore(reducer, applyMiddleware(...middleware))
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 render(
   <Provider store={store}>

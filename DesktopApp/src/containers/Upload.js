@@ -47,6 +47,8 @@ class Upload extends Component {
       errorActions
     } = this.props
 
+    console.log(this.props.history)
+
     return (
       <div className='UploadContainer'>
         <Paper className='StepperContainer'>

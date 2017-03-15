@@ -13,6 +13,8 @@ class CounterApp extends Component {
       content
     } = this.props
 
+    console.log(this.props)
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div className='App'>

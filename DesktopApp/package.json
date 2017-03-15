@@ -2,6 +2,7 @@
   "name": "DesktopApp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "devDependencies": {
     "electron": "^1.4.15",
     "react-scripts": "0.8.5",
@@ -29,6 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   }
 }

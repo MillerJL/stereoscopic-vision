@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+// import db from '../database'
 
 import Paper from 'material-ui/Paper'
 import Dialog from 'material-ui/Dialog'
