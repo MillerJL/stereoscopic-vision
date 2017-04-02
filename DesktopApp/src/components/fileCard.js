@@ -40,7 +40,7 @@ const fileCard = ({ file, index, onDelete, side }) => {
       <div className='CardDeleteButton'>
         <Paper style={{ display: 'flex', flexBasis: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
           <IconButton>
-            <Delete onClick={() => onDelete(side, index)} hoverColor='#B71C1C' />
+            <Delete onClick={() => onDelete({ side, file: index })} hoverColor='#B71C1C' />
           </IconButton>
         </Paper>
       </div>

@@ -8,3 +8,21 @@ export function changeStepper (value) {
     }
   }
 }
+
+export function toggleEditStep ({ disabled }) {
+  return {
+    type: types.TOGGLEEDITSTEP,
+    payload: {
+      disabled
+    }
+  }
+}
+
+export function toggleProcessStep ({ disabled }) {
+  return {
+    type: types.TOGGLEPREVIOUSSTEP,
+    payload: {
+      disabled
+    }
+  }
+}

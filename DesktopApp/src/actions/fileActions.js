@@ -3,8 +3,28 @@ import {
   addErrors,
   toggleErrorAlert
 } from './errorActions'
+import {
+  toggleEditStep
+} from './uploadPageActions'
+
 var remote = window.require('electron').remote
 var electronFs = remote.require('fs')
+
+// console.log(remote.app.getPath('documents'))
+// const spawn = remote.require('child_process').spawn
+// const ls = spawn('/Users/johnmiller/School/capstone/test/videoStuff/a.out')
+//
+// ls.stdout.on('data', (data) => {
+//   console.log(`stdout: ${data}`)
+// })
+//
+// ls.stderr.on('data', (data) => {
+//   console.log(`stderr: ${data}`)
+// })
+//
+// ls.on('close', (code) => {
+//   console.log(`child process exited with code ${code}`)
+// })
 
 function getFileType (type, name) {
   if (type.match(/video/g)) return 'video'
@@ -17,9 +37,7 @@ export function validateAddFile ({ files, side }) {
     let errors = []
 
     files.forEach(file => {
-      let error
-      if (error) console.log('ayy lmao')
-      const state = getState()
+      let error = []
       const payload = {
         name: file.name,
         path: file.path,
@@ -28,39 +46,40 @@ export function validateAddFile ({ files, side }) {
       }
 
       let fileSide = (side === 'left')
-        ? state.file.leftFileList
-        : state.file.rightFileList
+        ? 'leftFileList'
+        : 'rightFileList'
 
-      if (fileSide.length + 1 > 2) {
-        error = {
+      if (getState().file[fileSide].length + 1 > 2) {
+        error.push({
           message: 'Only a .fit and video file are required for each side',
           file: file.name
-        }
+        })
       }
-      if (fileSide.map(item => { return item.type }).includes(payload.type)) {
-        error = {
+      if (getState().file[fileSide].map(item => { return item.type }).includes(payload.type)) {
+        error.push({
           message: 'You have already selected a ' + payload.type + ' file',
           file: file.name
-        }
+        })
       } else if (!['video', 'fit'].includes(payload.type)) {
-        error = {
+        error.push({
           message: 'File type ' + payload.type + ' is not allowed',
           file: file.name
-        }
+        })
       }
 
-      if (!error) {
+      if (!error.length) {
         (side === 'left')
           ? dispatch(addLeftFile(file, payload))
           : dispatch(addRightFile(file, payload))
       } else {
-        errors.push(error)
+        errors.push(...error)
       }
     })
     if (errors.length > 0) {
       dispatch(addErrors(errors))
       dispatch(toggleErrorAlert())
     }
+    dispatch(validateFileState())
   }
 }
 
@@ -71,13 +90,6 @@ export function addLeftFile (file, payload) {
   }
 }
 
-export function removeLeftFile (file) {
-  return {
-    type: types.REMOVELEFTFILE,
-    payload: { file }
-  }
-}
-
 export function addRightFile (file, payload) {
   return {
     type: types.ADDRIGHTFILE,
@@ -85,9 +97,36 @@ export function addRightFile (file, payload) {
   }
 }
 
-export function removeRightFile (file) {
+export function removeFile ({ side, file }) {
+  return (dispatch, getState) => {
+    let removeFunction = (side === 'left')
+      ? removeLeftFile
+      : removeRightFile
+    dispatch(removeFunction({ file }))
+    dispatch(validateFileState())
+  }
+}
+
+export function removeLeftFile ({ file }) {
+  return {
+    type: types.REMOVELEFTFILE,
+    payload: { file }
+  }
+}
+
+export function removeRightFile ({ file }) {
   return {
     type: types.REMOVERIGHTFILE,
     payload: { file }
+  }
+}
+
+export function validateFileState () {
+  return (dispatch, getState) => {
+    if (getState().file.leftFileList.length === 2 && getState().file.rightFileList.length === 2) {
+      dispatch(toggleEditStep({ disabled: false }))
+    } else {
+      if (!getState().uploadPage.editStep.disabled) dispatch(toggleEditStep({ disabled: true }))
+    }
   }
 }

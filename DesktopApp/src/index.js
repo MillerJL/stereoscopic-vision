@@ -5,11 +5,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import Home from './containers/Home'
 import Upload from './containers/Upload'
+import Edit from './containers/Edit'
 import App from './containers/App'
 import * as reducers from './reducers'
 injectTapEventPlugin()
@@ -21,7 +22,7 @@ const reducer = combineReducers({
   routing: routerReducer
 })
 const store = createStore(reducer, applyMiddleware(...middleware))
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 render(
   <Provider store={store}>
@@ -29,6 +30,7 @@ render(
       <Route path='/' component={App}>
         <IndexRoute components={{ content: Home }} />
         <Route path='upload' components={{ content: Upload }} />
+        <Route path='edit' components={{ content: Edit }} />
       </Route>
     </Router>
   </Provider>,

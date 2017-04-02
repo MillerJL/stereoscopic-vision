@@ -2,13 +2,16 @@
   "name": "DesktopApp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "devDependencies": {
     "electron": "^1.4.15",
+    "electron-rebuild": "^1.5.7",
     "react-scripts": "0.8.5",
     "redux-logger": "^2.8.1"
   },
   "dependencies": {
     "dexie": "^2.0.0-beta.10",
+    "ffi": "^2.2.0",
     "file-type": "^4.1.0",
     "material-ui": "^0.16.7",
     "react": "^15.4.2",
@@ -23,12 +26,15 @@
     "redux-actions": "^1.2.1",
     "redux-thunk": "^2.2.0"
   },
-  "main": "src/electron.js",
+  "main": "electron.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "rebuild-ffi": "electron-rebuild -f -w ffi",
+    "rebuild-ref": "electron-rebuild -f -w ref"
   }
 }
