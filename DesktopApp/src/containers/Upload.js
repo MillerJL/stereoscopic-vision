@@ -10,9 +10,7 @@ import FileCard from '../components/fileCard'
 import Stepper from '../components/stepper'
 import ErrorAlert from '../components/errorAlert'
 import BottomButtons from '../components/bottomButtons'
-import {
-  steps
-} from '../constants'
+import { steps } from '../constants'
 
 class Upload extends Component {
   onDropLeft (acceptedFiles, rejectedFiles) {
@@ -33,9 +31,11 @@ class Upload extends Component {
     })
   }
 
-  removeFile (side, fileNum) {
-    if (side === 'left') this.props.fileActions.removeLeftFile(fileNum)
-    else this.props.fileActions.removeRightFile(fileNum)
+  removeFile ({ side, file }) {
+    this.props.fileActions.removeFile({
+      file,
+      side
+    })
   }
 
   render () {
@@ -46,8 +46,6 @@ class Upload extends Component {
       uploadPageActions,
       errorActions
     } = this.props
-
-    console.log(this.props.history)
 
     return (
       <div className='UploadContainer'>
@@ -115,7 +113,7 @@ class Upload extends Component {
             step: () => uploadPageActions.changeStepper(1),
             nav: '/Edit',
             tooltip: 'Edit',
-            disabled: false
+            disabled: uploadPageState.editStep.disabled
           }}
         />
 

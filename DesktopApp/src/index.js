@@ -16,8 +16,7 @@ import * as reducers from './reducers'
 injectTapEventPlugin()
 
 const middleware = [thunk]
-// if (process.env.NODE_ENV !== 'production') middleware.push(createLogger())
-middleware.push(createLogger())
+if (process.env.NODE_ENV !== 'production') middleware.push(createLogger())
 const reducer = combineReducers({
   ...reducers,
   routing: routerReducer

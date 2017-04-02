@@ -9,7 +9,7 @@ const stepper = ({ steps, value }) => (
   <Stepper activeStep={value}>
     {steps.map((step, index) => (
       <Step key={'stepper_' + index}>
-        <StepLabel>step</StepLabel>
+        <StepLabel>{step}</StepLabel>
       </Step>
     ))}
   </Stepper>

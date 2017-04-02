@@ -4,6 +4,8 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+// console.log(app.getPath('documents'))
+
 let mainWindow
 
 function createWindow () {

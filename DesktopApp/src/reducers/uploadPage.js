@@ -2,11 +2,14 @@ import * as types from '../actions'
 
 const initialState = {
   stepper: 0,
-  nextStep: {
-    enabled: false
+  uploadStep: {
+    disabled: false
   },
-  previousStep: {
-    enabled: false
+  editStep: {
+    disabled: true
+  },
+  processStep: {
+    disabled: true
   }
 }
 
@@ -20,6 +23,13 @@ export default function uploadPage (state = initialState, action = {}) {
       return {
         ...state,
         stepper: payload.value
+      }
+    case types.TOGGLEEDITSTEP:
+      return {
+        ...state,
+        editStep: {
+          disabled: payload.disabled
+        }
       }
     default:
       return state

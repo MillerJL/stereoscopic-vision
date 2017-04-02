@@ -1,7 +1,10 @@
 import * as types from '../actions'
+// import os from 'os'
+// console.log(os.tmpDir())
 
 const initialState = {
-  dialogOpen: false
+  dialogOpen: false,
+  directory: 'ayy'
 }
 
 export default function directorySelect (state = initialState, action = {}) {
