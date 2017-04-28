@@ -1,11 +1,13 @@
 import file from './file'
 import error from './error'
 import uploadPage from './uploadPage'
-import directorySelect from './directorySelect'
+import edit from './edit'
+import process from './process'
 
 export {
   file,
   error,
   uploadPage,
-  directorySelect
+  edit,
+  process
 }

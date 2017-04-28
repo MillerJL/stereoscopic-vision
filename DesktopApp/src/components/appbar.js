@@ -9,7 +9,9 @@ const Logged = (props) => (
   <IconMenu
     {...props}
     iconButtonElement={
-      <IconButton><NavigationMenu color='white' /></IconButton>
+      <IconButton>
+        <NavigationMenu color='white' />
+      </IconButton>
     }
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -21,7 +23,7 @@ const Logged = (props) => (
 
 const appBar = () => (
   <AppBar
-    title='My Videos'
+    title='Video Selection'
     iconClassNameRight='muidocs-icon-navigation-expand-more'
     zDepth={2}
     style={{ paddingBottom: '15px' }}

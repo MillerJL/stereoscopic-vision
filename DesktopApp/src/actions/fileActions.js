@@ -1,36 +1,32 @@
 import * as types from './index'
-import {
-  addErrors,
-  toggleErrorAlert
-} from './errorActions'
-import {
-  toggleEditStep
-} from './uploadPageActions'
+import { addErrors, toggleErrorAlert } from './errorActions'
+import { toggleEditStep } from './uploadPageActions'
+import { maxFileSize } from '../constants'
 
-var remote = window.require('electron').remote
-var electronFs = remote.require('fs')
+const remote = window.require('electron').remote
+const electronFs = remote.require('fs')
+const exec = remote.require('child_process').exec
 
-// console.log(remote.app.getPath('documents'))
-// const spawn = remote.require('child_process').spawn
-// const ls = spawn('/Users/johnmiller/School/capstone/test/videoStuff/a.out')
-//
-// ls.stdout.on('data', (data) => {
-//   console.log(`stdout: ${data}`)
-// })
-//
-// ls.stderr.on('data', (data) => {
-//   console.log(`stderr: ${data}`)
-// })
-//
-// ls.on('close', (code) => {
-//   console.log(`child process exited with code ${code}`)
-// })
-
-function getFileType (type, name) {
+function getFileType ({ type, name }) {
   if (type.match(/video/g)) return 'video'
   else if (name.match(/.fit/g)) return 'fit'
   else return type || 'unknown'
 }
+
+function getVideoDuration ({ filePath }) {
+  return new Promise((resolve, reject) => {
+    exec('ffprobe -v error -show_format -show_streams -i ' +
+    filePath, (e, stdout, stderr) => {
+      if (stderr) reject(stderr)
+      let out = stdout.toString('utf8')
+      let matched = out.match(/duration="?(\d*\.\d*)"?/)
+
+      resolve(parseFloat(matched[1]))
+    })
+  })
+}
+
+// 18553418184
 
 export function validateAddFile ({ files, side }) {
   return (dispatch, getState) => {
@@ -38,11 +34,12 @@ export function validateAddFile ({ files, side }) {
 
     files.forEach(file => {
       let error = []
+      console.log(electronFs.statSync(file.path))
       const payload = {
         name: file.name,
         path: file.path,
         size: electronFs.statSync(file.path)['size'] / 1000000.0,
-        type: getFileType(file.type, file.name)
+        type: getFileType({ type: file.type, name: file.name })
       }
 
       let fileSide = (side === 'left')
@@ -55,7 +52,9 @@ export function validateAddFile ({ files, side }) {
           file: file.name
         })
       }
-      if (getState().file[fileSide].map(item => { return item.type }).includes(payload.type)) {
+      if (getState().file[fileSide].map(item => {
+        return item.type
+      }).includes(payload.type)) {
         error.push({
           message: 'You have already selected a ' + payload.type + ' file',
           file: file.name
@@ -65,32 +64,56 @@ export function validateAddFile ({ files, side }) {
           message: 'File type ' + payload.type + ' is not allowed',
           file: file.name
         })
+      } else if (payload.size > maxFileSize) {
+        error.push({
+          message: 'File too large, maximum size of ' + maxFileSize + 'MB allowed',
+          file: file.name
+        })
       }
 
-      if (!error.length) {
-        (side === 'left')
-          ? dispatch(addLeftFile(file, payload))
-          : dispatch(addRightFile(file, payload))
-      } else {
-        errors.push(...error)
-      }
+      console.log(payload.size)
+      console.log(maxFileSize)
+
+      if (!error.length) dispatch(addFile({ file, side, payload }))
+      else errors.push(...error)
     })
     if (errors.length > 0) {
       dispatch(addErrors(errors))
       dispatch(toggleErrorAlert())
     }
-    dispatch(validateFileState())
   }
 }
 
-export function addLeftFile (file, payload) {
+export function addFile ({ file, side, payload }) {
+  return (dispatch, getState) => {
+    if (payload.type === 'video') {
+      getVideoDuration({ filePath: file.path }).then(duration => {
+        payload.duration = duration
+
+        ;(side === 'left')
+          ? dispatch(addLeftFile({ file, payload }))
+          : dispatch(addRightFile({ file, payload }))
+        dispatch(validateFileState())
+      }).catch(err => {
+        console.log(err)
+      })
+    } else {
+      (side === 'left')
+        ? dispatch(addLeftFile({ file, payload }))
+        : dispatch(addRightFile({ file, payload }))
+      dispatch(validateFileState())
+    }
+  }
+}
+
+export function addLeftFile ({ file, payload }) {
   return {
     type: types.ADDLEFTFILE,
     payload
   }
 }
 
-export function addRightFile (file, payload) {
+export function addRightFile ({ file, payload }) {
   return {
     type: types.ADDRIGHTFILE,
     payload
@@ -123,10 +146,13 @@ export function removeRightFile ({ file }) {
 
 export function validateFileState () {
   return (dispatch, getState) => {
-    if (getState().file.leftFileList.length === 2 && getState().file.rightFileList.length === 2) {
+    if (getState().file.leftFileList.length === 1 &&
+    getState().file.rightFileList.length === 1) {
       dispatch(toggleEditStep({ disabled: false }))
     } else {
-      if (!getState().uploadPage.editStep.disabled) dispatch(toggleEditStep({ disabled: true }))
+      if (!getState().uploadPage.editStep.disabled) {
+        dispatch(toggleEditStep({ disabled: true }))
+      }
     }
   }
 }

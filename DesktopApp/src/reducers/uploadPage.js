@@ -6,10 +6,10 @@ const initialState = {
     disabled: false
   },
   editStep: {
-    disabled: true
+    disabled: false
   },
   processStep: {
-    disabled: true
+    disabled: false
   }
 }
 

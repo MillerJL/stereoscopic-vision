@@ -3,25 +3,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-
+import RaisedButton from 'material-ui/RaisedButton'
+import LinearProgress from 'material-ui/LinearProgress'
 import Stepper from '../components/stepper'
+
 import ErrorAlert from '../components/errorAlert'
 import BottomButtons from '../components/bottomButtons'
 import * as fileActions from '../actions/fileActions'
 import * as errorActions from '../actions/errorActions'
 import * as uploadPageActions from '../actions/uploadPageActions'
 import * as editActions from '../actions/editActions'
+import * as processActions from '../actions/processActions'
 import {
   steps
 } from '../constants'
-
-var remote = window.require('electron').remote
-var dialog = remote.require('electron').dialog
-
-const electronOpenDialogue = () => dialog.showOpenDialog({
-  properties: ['openDirectory']
-})
 
 class Edit extends Component {
   render () {
@@ -30,18 +25,9 @@ class Edit extends Component {
       uploadPageState,
       uploadPageActions,
       errorActions,
-      editActions,
-      editState
+      processActions,
+      processState
     } = this.props
-
-    function openDialogue () {
-      let path = electronOpenDialogue()[0]
-      editActions.directorySelect({ path })
-    }
-
-    function updateFileName (event, fileName) {
-      editActions.updateFileName({ fileName })
-    }
 
     return (
       <div className='EditContainer'>
@@ -52,42 +38,57 @@ class Edit extends Component {
           />
         </Paper>
 
-        {/*
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-          </div>
-        */}
-
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            flexDirection: 'column'
           }}
         >
-          {'Save file to: '}&nbsp;
-          <div className='DirectorySelect' onClick={openDialogue}>
-            {editState.directory}&nbsp;{'/'}&nbsp;
+          <div style={{ display: 'flex' }}>
+            <RaisedButton
+              onClick={processActions.process}
+              disabled={processState.processButton}
+            >
+              {'Process'}
+            </RaisedButton>
           </div>
-
-          <TextField
-            id='text-field-default'
-            defaultValue={editState.fileName}
-            onChange={updateFileName}
+          <br />
+          <div>Stabilizing Video 1</div>
+          <LinearProgress
+            mode='determinate'
+            value={processState.progress.stabilizeVideo1}
+            color={processState.progress.stabilizeVideo1Color}
+          />
+          <br />
+          <div>Stabilizing Video 2</div>
+          <LinearProgress
+            mode='determinate'
+            value={processState.progress.stabilizeVideo2}
+            color={processState.progress.stabilizeVideo2Color}
+          />
+          <br />
+          <div>Combining Videos</div>
+          <LinearProgress
+            mode='determinate'
+            value={processState.progress.combineVideos}
+            color={processState.progress.combineVideosBarColor}
           />
         </div>
 
         <BottomButtons
           leftArrow={{
-            step: () => uploadPageActions.changeStepper(0),
-            nav: '/',
+            step: () => uploadPageActions.changeStepper(1),
+            nav: '/edit',
             tooltip: 'Upload',
-            disabled: uploadPageState.uploadStep.disabled
+            disabled: uploadPageState.editStep.disabled
           }}
           rightArrow={{
             step: () => uploadPageActions.changeStepper(2),
             nav: '/process',
             tooltip: 'Process',
-            disabled: uploadPageState.processStep.disabled
+            disabled: true
           }}
         />
 
@@ -106,7 +107,8 @@ function mapStateToProps (state) {
     fileState: state.file,
     errorState: state.error,
     uploadPageState: state.uploadPage,
-    editState: state.edit
+    editState: state.edit,
+    processState: state.process
   }
 }
 
@@ -115,7 +117,8 @@ function mapDispatchToProps (dispatch) {
     fileActions: bindActionCreators(fileActions, dispatch),
     errorActions: bindActionCreators(errorActions, dispatch),
     uploadPageActions: bindActionCreators(uploadPageActions, dispatch),
-    editActions: bindActionCreators(editActions, dispatch)
+    editActions: bindActionCreators(editActions, dispatch),
+    processActions: bindActionCreators(processActions, dispatch)
   }
 }
 

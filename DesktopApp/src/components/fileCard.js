@@ -29,18 +29,35 @@ const fileCard = ({ file, index, onDelete, side }) => {
   }
 
   return (
-    <div style={{ display: 'flex', marginBottom: '5px' }}>
-      <Card style={{ width: '90%' }} containerStyle={{ display: 'flex', flexBasis: '90%' }}>
+    <div
+      style={{ display: 'flex', marginBottom: '5px' }}
+    >
+      <Card
+        style={{ width: '90%' }}
+        containerStyle={{ display: 'flex', flexBasis: '90%' }}
+      >
         <CardHeader
           title={file.name}
           avatar={icon}
-          subtitle={file.size.toFixed(1) + 'mb - ' + file.path.substring(0, file.path.lastIndexOf('/'))}
+          subtitle={
+            file.size.toFixed(1) + 'mb - ' +
+            file.path.substring(0, file.path.lastIndexOf('/'))
+          }
         />
       </Card>
       <div className='CardDeleteButton'>
-        <Paper style={{ display: 'flex', flexBasis: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Paper style={{
+          display: 'flex',
+          flexBasis: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
           <IconButton>
-            <Delete onClick={() => onDelete({ side, file: index })} hoverColor='#B71C1C' />
+            <Delete
+              onClick={() => onDelete({ side, file: index })}
+              hoverColor='#B71C1C'
+            />
           </IconButton>
         </Paper>
       </div>

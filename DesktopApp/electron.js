@@ -3,6 +3,7 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
+const dialog = electron.dialog
 
 // console.log(app.getPath('documents'))
 
@@ -42,3 +43,9 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+exports.selectDirectory = () => {
+  dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  })
+}

@@ -86,22 +86,26 @@ const Home = () => (
         <Subheader>{directory.directory}</Subheader>
         {directory.videos.slice(0, 4).map((video, vidIndex) => {
           if (vidIndex < 3) {
-            return (<GridTile
-              key={directory.directory + '_' + vidIndex.toString()}
-              title={video.title}
-              subtitle={<span>by <b>{video.author}</b></span>}
-              actionIcon={<IconButton><NavigationMenu color='white' /></IconButton>}
-            >
-              <img src={video.img} alt='ayy lmao' />
-            </GridTile>)
+            return (
+              <GridTile
+                key={directory.directory + '_' + vidIndex.toString()}
+                title={video.title}
+                subtitle={<span>by <b>{video.author}</b></span>}
+                actionIcon={<IconButton><NavigationMenu color='white' /></IconButton>}
+              >
+                <img src={video.img} alt='ayy lmao' />
+              </GridTile>
+            )
           } else {
-            return (<GridTile
-              key={directory.directory + '_' + vidIndex.toString()}
-              title={'And ' + (directory.videos.length - 3).toString() + ' more videos'}
-              actionIcon={<IconButton><ArrowForward color='white' /></IconButton>}
-            >
-              <img src={defaultImg} alt='ayy lmao' />
-            </GridTile>)
+            return (
+              <GridTile
+                key={directory.directory + '_' + vidIndex.toString()}
+                title={'And ' + (directory.videos.length - 3).toString() + ' more videos'}
+                actionIcon={<IconButton><ArrowForward color='white' /></IconButton>}
+              >
+                <img src={defaultImg} alt='ayy lmao' />
+              </GridTile>
+            )
           }
         })}
       </GridList>

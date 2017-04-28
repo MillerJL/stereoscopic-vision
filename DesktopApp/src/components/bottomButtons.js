@@ -29,7 +29,7 @@ const bottomButtons = ({ leftArrow, rightArrow }) => {
             hashHistory.push(rightArrow.nav)
           }}
           disabled={rightArrow.disabled}
-          >
+        >
           <RightArrow />
         </IconButton>
       </div>

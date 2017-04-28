@@ -1,7 +1,8 @@
 import { steps } from './uploadPage'
-import { allowedFileTypes } from './files'
+import { allowedFileTypes, maxFileSize } from './files'
 
 export {
   steps,
-  allowedFileTypes
+  allowedFileTypes,
+  maxFileSize
 }

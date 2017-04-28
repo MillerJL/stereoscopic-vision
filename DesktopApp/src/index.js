@@ -12,6 +12,7 @@ import Home from './containers/Home'
 import Upload from './containers/Upload'
 import Edit from './containers/Edit'
 import App from './containers/App'
+import Process from './containers/Process'
 import * as reducers from './reducers'
 injectTapEventPlugin()
 
@@ -28,9 +29,9 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
-        <IndexRoute components={{ content: Home }} />
-        <Route path='upload' components={{ content: Upload }} />
+        <IndexRoute components={{ content: Upload }} />
         <Route path='edit' components={{ content: Edit }} />
+        <Route path='process' components={{ content: Process }} />
       </Route>
     </Router>
   </Provider>,

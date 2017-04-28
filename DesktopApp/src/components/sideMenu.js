@@ -17,10 +17,18 @@ const sideMenu = () => (
     </Paper>
     <Paper zDepth={2}>
       <Menu>
-        <Link to='/' style={{ textDecoration: 'none' }} activeStyle={{ background: 'red' }}>
+        <Link
+          to='/'
+          style={{ textDecoration: 'none' }}
+          activeStyle={{ background: 'red' }}
+        >
           <MenuItem primaryText='Videos' leftIcon={<VideoLibrary />} />
         </Link>
-        <Link to='/upload' style={{ textDecoration: 'none' }} activeStyle={{ background: 'red' }}>
+        <Link
+          to='/upload'
+          style={{ textDecoration: 'none' }}
+          activeStyle={{ background: 'red' }}
+        >
           <MenuItem primaryText='Upload' leftIcon={<UploadFile />} />
         </Link>
         <MenuItem primaryText='Edit' leftIcon={<Edit />} />
