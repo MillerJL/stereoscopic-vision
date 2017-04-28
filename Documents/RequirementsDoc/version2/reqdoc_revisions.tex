@@ -1,0 +1,84 @@
+\documentclass[10pt,letterpaper,onecolumn]{article}
+
+\usepackage[top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+
+\title{Senior Capstone Requirements Doc Revisions}
+\author{Group 54: John Miller, Samuel Schultz, Erin Sullens}
+\date{April 27, 2017}
+\begin{document}
+
+\maketitle
+\vspace{-0.3in}
+\noindent
+\rule{\linewidth}{0.4pt}
+
+\noindent
+While working on the project, learning more about how VR devices work and the capabilities/limitations of systems, we were forced to make some changes to our original project requirements.
+These changes are outlined in this paper.
+Each change that falls under a similar scope to other changes are grouped in the same section and each section lists what specific items in the requirements document were altered.
+These lists follow the format:
+\begin{equation}
+  1.x.x \; (1.y.y) \; Section Title: \; Description \; of \; Changes
+\end{equation}
+Where $1.x.x$ is the section of the original requirements doc, and $1.y.y$ is the section on the new requirements doc
+
+\section{Removal of Mobile Application}
+This section will detail the alterations made to the requirements document relating to the Mobile Application Requirement.
+\subsection{Rational}
+As time passed we realized the development of a mobile application would not be able to be completed for several reasons:
+\begin{itemize}
+  \item Limitations of mobile hardware with requirements of project
+  \item Lack of video processing tools available on mobile devices
+  \item Lack of time and labor needed to complete mobile app
+\end{itemize}
+We discussed these reasons with our client, who was understanding and stated that it was okay for us to focus on the desktop application exclusively and drop the mobile application as a requirement.
+\subsection{Items Altered}
+\begin{itemize}
+  \item 1.2 (1.2) Scope: Altered to remove references to mobile application
+  \item 1.3.2 (1.3 Definition for Mobile Application): Removed
+  \item 2.1 (2.1) Product Perspective: Removed references to mobile application
+  \item 2.5 (2.10) Assumptions and Dependencies: Removed portion discussing mobile application
+  \item 3.4.1 (3.4.1) Standards Compliance: Removed mobile application
+  \item 3.5.3 (3.5.3) Portability: Altered section discussing mobile application to instead discuss other portability solutions.
+\end{itemize}
+
+\section{Alterations to Desktop Application UI}
+Changes to the Desktop Application UI were necessary as the project evolved.
+Details of the changes are outlined here.
+\subsection{Rational}
+After working on the application for some time and discussing our clients use cases/needs it became apparent that some of the features of the Desktop application were unnecessary and would potentially even hamper its use. Some of these features include:
+\begin{itemize}
+  \item Items related to managing videos created by the application
+  \begin{itemize}
+    \item Creating directories and categories to store videos in, under the scope of the application
+  \end{itemize}
+\end{itemize}
+Due to the size of the videos and the technical skill of the client it makes much more sense to let the user manage their own videos.
+\subsection{Items Altered}
+\begin{itemize}
+  \item 2.1.1 (2.2) User Interfaces: Altered to remove mentions of categorizing and viewing videos and added references to user selecting video output locations on file system
+  \item 2.1.5 (2.6) Operations: Removed section discussing backup and recovery
+  \item 2.5 (2.10) Assumptions and Dependencies: Changed wording surrounding file input assumptions to be more descriptive.
+\end{itemize}
+
+\section{Output File Type Selection}
+The original specification for output file type selection was based on assumptions by the group which turned out to be unfounded.
+This section discusses the changes made to this specification.
+\subsection{Rational}
+Before becoming familiar with stereoscopic video display, we assumed that there were many different file formats used by all the different devices we wanted to display on.
+After working on the project we realized that virtually all relevant 3D video players use a side-by-side format.
+Because of this we decided it would be easier for us and the user to just output the processed video file in the single side-by-side format.
+\subsection{Items Altered}
+\begin{itemize}
+  \item 2.1.1 (2.2) User Interfaces: Removed mentions of selecting output file type
+  \item 2.1.5 (2.6) Operations: Removed mentions of selecting output file type and added section discussing saving files to user file system
+  \item 2.2 (2.7) Product Functions: Changed "Retrieve converted file for use" to "Save final processed video file to host file system"
+\end{itemize}
+
+\section{Justification}
+We feel that that even without the mobile application the project is complex enough to justify removing it.
+The desktop application still provides many different features to work on.
+Given that the client is okay with it and there is still enough work to be done we believe these changes should be allowed.
+\end{document}
