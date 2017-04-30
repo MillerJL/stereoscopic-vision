@@ -4,8 +4,12 @@ const initialState = {
   leftFileList: [],
   rightFileList: [],
   progress: {
-    combineVideos: parseInt(0),
-    combineVideosBarColor: 'rgb(0, 188, 212)'
+    combineVideos: 0,
+    combineVideosBarColor: 'rgb(0, 188, 212)',
+    stabilizeLeft: 0,
+    stabilizeLeftColor: 'rgb(0, 188, 212)',
+    stabilizeRight: 0,
+    stabilizeRightColor: 'rgb(0, 188, 212)'
   },
   processButton: false,
   stepIndex: 0
@@ -18,15 +22,26 @@ export default function process (state = initialState, action = {}) {
         ...state,
         progress: {
           ...state.progress,
-          combineVideos: action.payload.progress
+          combineVideos: action.payload.progress,
+          combineVideosBarColor: action.payload.color
         }
       }
-    case types.CHANGEPROGRESSBARCOLOR:
+    case types.UPDATELEFTPROGRESSBAR:
       return {
         ...state,
         progress: {
           ...state.progress,
-          combineVideosBarColor: action.payload.color
+          stabilizeLeft: action.payload.progress,
+          stabilizeLeftColor: action.payload.color
+        }
+      }
+    case types.UPDATERIGHTPROGRESSBAR:
+      return {
+        ...state,
+        progress: {
+          ...state.progress,
+          stabilizeRight: action.payload.progress,
+          stabilizeRightColor: action.payload.color
         }
       }
     case types.TOGGLEPROCESSBUTTON:

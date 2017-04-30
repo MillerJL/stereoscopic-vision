@@ -4,19 +4,31 @@ import * as types from './index'
 const remote = window.require('electron').remote
 const spawn = remote.require('child_process').spawn
 
-export function updateProgressBar ({ progress = 0 }) {
+export function updateProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
   return {
     type: types.UPDATEPROGRESSBAR,
     payload: {
-      progress
+      progress,
+      color
     }
   }
 }
 
-export function changeProgressBarColor ({ color }) {
+export function updateLeftProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
   return {
-    type: types.CHANGEPROGRESSBARCOLOR,
+    type: types.UPDATELEFTPROGRESSBAR,
     payload: {
+      progress,
+      color
+    }
+  }
+}
+
+export function updateRightProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
+  return {
+    type: types.UPDATERIGHTPROGRESSBAR,
+    payload: {
+      progress,
       color
     }
   }
@@ -28,72 +40,154 @@ export function toggleProcessButton () {
   }
 }
 
-async function preStabilize ({ vid, out, dispatch, updateBar, updateColor }) {
-  const stab = spawn('ffmpeg', [
-    '-i',
-    vid.path,
-    '-vf',
-    'vidstabdetect=stepsize=6:shakiness=8:accuracy=9:result=' + out,
-    '-f',
-    'null',
-    '-'
-  ])
+function decodeOutput ({ data }) {
+  let temp = ''
 
-  stab.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
+  data.forEach(character => {
+    temp += String.fromCharCode(character)
   })
 
-  stab.stderr.on('data', (data) => {
-    console.log(data)
-    // dispatch(updateBar())
-  })
+  return temp
+}
 
-  stab.on('close', (code) => {
-    console.log(code)
-    // dispatch(updateColor({ color: '#8BC34A' }))
-    // dispatch(updateBar({ progress: 100 }))
+function getTime ({ output }) {
+  let temp = output.replace(/\s+/g, ' ')
+  .replace(/=\s+/g, '=')
+  .split(' ')
+  .filter(Boolean)
+  .reduce((acc, item) => {
+    let keyVal
+    keyVal = item.split('=')
+    acc[keyVal[0]] = keyVal[1]
 
-    return out
+    return acc
+  }, {})
+  let a = temp.time.split(':')
+
+  return (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2])
+}
+
+function preStabilize ({ vid, out, dispatch, bar }) {
+  return new Promise((resolve, reject) => {
+    const stab = spawn('ffmpeg', [
+      '-i',
+      vid.path,
+      '-vf',
+      'vidstabdetect=stepsize=6:shakiness=8:accuracy=9:result=' + out,
+      '-f',
+      'null',
+      '-'
+    ])
+
+    stab.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`)
+    })
+
+    stab.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`)
+
+      let output = decodeOutput({ data })
+
+      if (output.includes('frame= ')) {
+        let progress = parseInt((getTime({ output }) / vid.duration) * 100, 10)
+
+        dispatch(bar({ progress }))
+      }
+    })
+
+    stab.on('close', (code) => {
+      console.log(code)
+      dispatch(bar({ progress: 100, color: '#8BC34A' }))
+
+      resolve(out)
+    })
   })
 }
 
-async function stabilize ({ vid, trf, out, dispatch, updateBar, updateColor }) {
-  const stab = spawn('ffmpeg', [
-    '-i',
-    vid.path,
-    '-vf',
-    'vidstabtransform=input=' + trf + ':zoom=1:smoothing=30,unsharp=5:5:0.8:3:3:0.4',
-    '-vcodec',
-    'libx264',
-    '-preset',
-    'slow',
-    '-tune',
-    'film',
-    '-crf',
-    '18',
-    '-acodec',
-    'copy',
-    out,
-    '-f',
-    'null',
-    '-'
-  ])
+function stabilize ({ vid, trf, out, dispatch, bar }) {
+  return new Promise((resolve, reject) => {
+    const stab = spawn('ffmpeg', [
+      '-i',
+      vid.path,
+      '-vf',
+      'vidstabtransform=input=' + trf + ':zoom=1:smoothing=30,unsharp=5:5:0.8:3:3:0.4',
+      '-vcodec',
+      'libx264',
+      '-preset',
+      'slow',
+      '-tune',
+      'film',
+      '-crf',
+      '18',
+      '-acodec',
+      'copy',
+      out,
+      '-f',
+      'null',
+      '-'
+    ])
 
-  stab.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
+    stab.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`)
+    })
+
+    stab.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`)
+
+      let output = decodeOutput({ data })
+
+      if (output.includes('frame= ')) {
+        let progress = parseInt((getTime({ output }) / vid.duration) * 100, 10)
+
+        dispatch(bar({ progress }))
+      }
+    })
+
+    stab.on('close', (code) => {
+      console.log(code)
+      dispatch(bar({ progress: 100, color: '#8BC34A' }))
+
+      resolve({
+        path: out,
+        duration: vid.duration,
+        name: vid.name
+      })
+    })
   })
+}
 
-  stab.stderr.on('data', (data) => {
-    console.log(data)
-    // dispatch(updateBar())
-  })
+function combineVideos ({ leftVideo, rightVideo, out, dispatch, bar }) {
+  return new Promise((resolve, reject) => {
+    const ls = spawn('ffmpeg', [
+      '-i',
+      leftVideo.path,
+      '-i',
+      rightVideo.path,
+      '-filter_complex',
+      '[0:v:0]pad=iw*2:ih[bg]; [bg][1:v:0]overlay=w',
+      out
+    ])
 
-  stab.on('close', (code) => {
-    console.log(code)
-    // dispatch(updateColor({ color: '#8BC34A' }))
-    // dispatch(updateBar({ progress: 100 }))
+    ls.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`)
+    })
 
-    return out
+    ls.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`)
+      let output = decodeOutput({ data })
+
+      if (output.includes('frame= ')) {
+        let progress = parseInt((getTime({ output }) / leftVideo.duration) * 100, 10)
+
+        dispatch(bar({ progress }))
+      }
+    })
+
+    ls.on('close', (code) => {
+      console.log(`child process exited with code ${code}`)
+
+      dispatch(updateProgressBar({ progress: 100, color: '#8BC34A' }))
+    })
   })
 }
 
@@ -115,91 +209,46 @@ export function process () {
       })[0]
     }
 
-    let stab1Pre = await preStabilize({
-      vid: files.leftVideo,
-      out: '/Users/johnmiller/School/capstone/test/videoStuff/tempout1.trf',
-      dispatch,
-      updateBar: 'ayy',
-      updateColor: 'lmao'
-    })
-    let stab1 = await stabilize({
-      vid: files.leftVideo,
-      trf: stab1Pre,
-      out: '/Users/johnmiller/School/capstone/test/videoStuff/stab1.mp4',
-      dispatch,
-      updateBar: 'ayy',
-      updateColor: 'lmao'
-    })
-
-    // let stab2Pre = await preStabilize({
-    //   vid: files.leftVideo,
-    //   out: '/Users/johnmiller/School/capstone/test/videoStuff/tempout1.trf',
-    //   dispatch,
-    //   updateBar: 'ayy',
-    //   updateColor: 'lmao'
-    // })
-    // let stab1 = await stabilize({
-    //   vid: files.leftVideo,
-    //   trf: stab2Pre,
-    //   out: '/Users/johnmiller/School/capstone/test/videoStuff/stab1.mp4',
-    //   dispatch,
-    //   updateBar: 'ayy',
-    //   updateColor: 'lmao'
-    // })
-
-    // dispatch(stabilizeVideo1({ files, edit }))
-    const ls = spawn('ffmpeg', [
-      '-i',
-      files.leftVideo.path,
-      '-i',
-      files.rightVideo.path,
-      '-filter_complex',
-      '[0:v:0]pad=iw*2:ih[bg]; [bg][1:v:0]overlay=w',
-      path.join(edit.directory, edit.fileName)
-    ])
-
-    // I wish progress printed to here. Maybe some ffmpeg flag will help...
-    ls.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
-    })
-
-    // Errors and progress
-    ls.stderr.on('data', (data) => {
-      let temp = ''
-
-      data.forEach(character => {
-        temp += String.fromCharCode(character)
+    let stabVideos = [
+      preStabilize({
+        vid: files.leftVideo,
+        out: '/tmp/preStabLeft.trf',
+        dispatch,
+        bar: updateLeftProgressBar
+      }).then(trf => {
+        return stabilize({
+          vid: files.leftVideo,
+          trf,
+          out: '/tmp/stabLeft.mp4',
+          dispatch,
+          bar: updateLeftProgressBar
+        })
+      }),
+      preStabilize({
+        vid: files.rightVideo,
+        out: '/tmp/preStabRight.trf',
+        dispatch,
+        bar: updateRightProgressBar
+      }).then(trf => {
+        return stabilize({
+          vid: files.rightVideo,
+          trf,
+          out: '/tmp/stabRight.mp4',
+          dispatch,
+          bar: updateRightProgressBar
+        })
       })
-      if (temp.includes('frame= ')) {
-        // Potentially cleaner solution, not working right now
-        // let regex = new RegExp('^frame=\s*(.*?)\s*fps=\s*(.*?)\s*q=\s*(.*?)\s*size=\s*(.*?)\s*time=\s*(.*?)\s*bitrate=\s*(.*?)\s*speed=\s*(.*?)\s*$')
+    ]
 
-        temp = temp.replace(/\s+/g, ' ')
-        .replace(/=\s+/g, '=')
-        .split(' ')
-        .filter(Boolean)
-        .reduce((acc, item) => {
-          let keyVal
-          keyVal = item.split('=')
-          acc[keyVal[0]] = keyVal[1]
-
-          return acc
-        }, {})
-
-        let a = temp.time.split(':')
-        let seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2])
-        let progress = parseInt((seconds / files.leftVideo.duration) * 100)
-
-        dispatch(updateProgressBar({ progress }))
-      }
+    let results = await Promise.all(stabVideos)
+    console.log(results)
+    let combVids = await combineVideos({
+      leftVideo: results[0],
+      rightVideo: results[1],
+      out: path.join(edit.directory, edit.fileName),
+      dispatch,
+      bar: updateProgressBar
     })
-
-    // Done
-    ls.on('close', (code) => {
-      console.log(`child process exited with code ${code}`)
-
-      dispatch(changeProgressBarColor({ color: '#8BC34A' }))
-      dispatch(updateProgressBar({ progress: 100 }))
-    })
+    console.log(combVids)
   }
 }

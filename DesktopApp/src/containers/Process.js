@@ -58,15 +58,15 @@ class Edit extends Component {
           <div>Stabilizing Video 1</div>
           <LinearProgress
             mode='determinate'
-            value={processState.progress.stabilizeVideo1}
-            color={processState.progress.stabilizeVideo1Color}
+            value={processState.progress.stabilizeLeft}
+            color={processState.progress.stabilizeLeftColor}
           />
           <br />
           <div>Stabilizing Video 2</div>
           <LinearProgress
             mode='determinate'
-            value={processState.progress.stabilizeVideo2}
-            color={processState.progress.stabilizeVideo2Color}
+            value={processState.progress.stabilizeRight}
+            color={processState.progress.stabilizeRightColor}
           />
           <br />
           <div>Combining Videos</div>

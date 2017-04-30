@@ -1,6 +1,5 @@
 import '../public/stylesheets/main.css'
 import React, { Component } from 'react'
-import SideMenu from '../components/sideMenu'
 import AppBarComponent from '../components/appbar'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'

@@ -8,7 +8,6 @@ import { Provider } from 'react-redux'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import Home from './containers/Home'
 import Upload from './containers/Upload'
 import Edit from './containers/Edit'
 import App from './containers/App'
