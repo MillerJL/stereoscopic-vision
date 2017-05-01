@@ -27,7 +27,7 @@ Team 54
 * Run Tutorial.exe
 
 ## Using the App:
-* On the first screen add two valid video files, one for each side
+* On the first screen add two valid video files, one for each side (in the sample video folder there is a sample pair of videos to use)
 * Click the next arrow
 * Choose an output location for the final video
 * Click the next arrow
