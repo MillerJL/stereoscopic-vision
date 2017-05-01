@@ -199,7 +199,7 @@ class Edit extends Component {
         <ErrorAlert
           toggleErrorAlert={errorActions.toggleErrorAlert}
           errorState={errorState}
-          title='Edit Errors'
+          title='Processing Errors'
         />
       </div>
     )

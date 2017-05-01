@@ -1,5 +1,6 @@
 import path from 'path'
 import * as types from './index'
+import { addErrors, toggleErrorAlert } from './errorActions'
 
 const remote = window.require('electron').remote
 const spawn = remote.require('child_process').spawn
@@ -87,6 +88,8 @@ function preStabilize ({ vid, out, dispatch, bar }) {
       })
     }
 
+    let logs = []
+
     const stab = spawn('ffmpeg', [
       '-i',
       vid.path,
@@ -105,6 +108,7 @@ function preStabilize ({ vid, out, dispatch, bar }) {
       // console.log(`stderr: ${data}`)
 
       let output = decodeOutput({ data })
+      logs.push({ message: output })
 
       if (output.includes('frame= ')) {
         let progress = parseInt((getTime({ output }) / vid.duration) * 100, 10)
@@ -115,9 +119,12 @@ function preStabilize ({ vid, out, dispatch, bar }) {
 
     stab.on('close', (code) => {
       // console.log(code)
-      dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
-
-      resolve(out)
+      if (code === 0) {
+        dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
+        resolve(out)
+      } else {
+        reject(logs)
+      }
     })
   })
 }
@@ -130,6 +137,8 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
         return
       })
     }
+
+    let logs = []
 
     const stab = spawn('ffmpeg', [
       '-i',
@@ -160,6 +169,7 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
       // console.log(`stderr: ${data}`)
 
       let output = decodeOutput({ data })
+      logs.push({ message: output })
 
       if (output.includes('frame= ')) {
         let progress = parseInt((getTime({ output }) / vid.duration) * 100, 10)
@@ -170,51 +180,64 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
 
     stab.on('close', (code) => {
       // console.log(code)
-      dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
+      if (code === 0) {
+        dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
 
-      resolve({
-        path: out,
-        trf,
-        duration: vid.duration,
-        name: vid.name
-      })
+        resolve({
+          path: out,
+          trf,
+          duration: vid.duration,
+          name: vid.name
+        })
+      } else {
+        reject(logs)
+      }
     })
   })
 }
 
 function combineVideos ({ leftVideo, rightVideo, out, dispatch, bar }) {
   return new Promise((resolve, reject) => {
-    const ls = spawn('ffmpeg', [
-      '-i',
-      leftVideo.path,
-      '-i',
-      rightVideo.path,
-      '-filter_complex',
-      '[0:v:0]pad=iw*2:ih[bg]; [bg][1:v:0]overlay=w',
-      out
-    ])
+    let logs = []
 
-    ls.stdout.on('data', (data) => {
-      // console.log(`stdout: ${data}`)
-    })
+    if (electronFs.existsSync(out)) {
+      reject([{ message: 'Output file already exists', file: out }])
+    } else {
+      const ls = spawn('ffmpeg', [
+        '-i',
+        leftVideo.path,
+        '-i',
+        rightVideo.path,
+        '-filter_complex',
+        '[0:v:0]pad=iw*2:ih[bg]; [bg][1:v:0]overlay=w',
+        out
+      ])
 
-    ls.stderr.on('data', (data) => {
-      // console.log(`stderr: ${data}`)
-      let output = decodeOutput({ data })
+      ls.stdout.on('data', (data) => {
+        // console.log(`stdout: ${data}`)
+      })
 
-      if (output.includes('frame= ')) {
-        let progress = parseInt((getTime({ output }) / leftVideo.duration) * 100, 10)
+      ls.stderr.on('data', (data) => {
+        // console.log(`stderr: ${data}`)
+        let output = decodeOutput({ data })
+        logs.push({ message: output })
 
-        dispatch(bar({ progress }))
-      }
-    })
+        if (output.includes('frame= ')) {
+          let progress = parseInt((getTime({ output }) / leftVideo.duration) * 100, 10)
 
-    ls.on('close', (code) => {
-      // console.log(`child process exited with code ${code}`)
+          dispatch(bar({ progress }))
+        }
+      })
 
-      dispatch(updateProgressBar({ progress: 100, color: '#8BC34A' }))
-      resolve(out)
-    })
+      ls.on('close', (code) => {
+        if (code === 0) {
+          dispatch(updateProgressBar({ progress: 100, color: '#8BC34A' }))
+          resolve(out)
+        } else {
+          reject(logs)
+        }
+      })
+    }
   })
 }
 
@@ -283,20 +306,31 @@ export function process ({ tmpDir }) {
       })
     ]
 
-    let results = await Promise.all(stabVideos)
-    await combineVideos({
-      leftVideo: results[0],
-      rightVideo: results[1],
-      out: path.join(edit.directory, edit.fileName),
-      dispatch,
-      bar: updateProgressBar
-    })
-    await Promise.all(results.map(file => {
-      return cleanup({
-        file
+    try {
+      let results = await Promise.all(stabVideos)
+      await combineVideos({
+        leftVideo: results[0],
+        rightVideo: results[1],
+        out: path.join(edit.directory, edit.fileName),
+        dispatch,
+        bar: updateProgressBar
       })
-    }))
-    hashHistory.push('/review')
+      await Promise.all(results.map(file => {
+        return cleanup({
+          file
+        })
+      }))
+      hashHistory.push('/review')
+    } catch (e) {
+      let err
+
+      if (Array.isArray(e)) err = e
+      else if (e.message) err = [e]
+      else err = [{ message: e }]
+      dispatch(addErrors(err))
+      dispatch(toggleErrorAlert())
+      dispatch(toggleProcessButton())
+    }
   }
 }
 

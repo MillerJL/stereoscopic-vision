@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
+
 import Paper from 'material-ui/Paper'
 import * as fileActions from '../actions/fileActions'
 import * as errorActions from '../actions/errorActions'
 import * as uploadPageActions from '../actions/uploadPageActions'
+
 import FileCard from '../components/fileCard'
 import Stepper from '../components/stepper'
 import ErrorAlert from '../components/errorAlert'
