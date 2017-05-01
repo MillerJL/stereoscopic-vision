@@ -53,6 +53,23 @@ export default function process (state = initialState, action = {}) {
         ...state,
         processButton: !state.processButton
       }
+    case types.PROCESSRESET:
+      return {
+        leftFileList: [],
+        rightFileList: [],
+        progress: {
+          combineVideos: 0,
+          combineVideosBarColor: 'rgb(0, 188, 212)',
+          stabilizeLeft: 0,
+          stabilizeLeftColor: 'rgb(0, 188, 212)',
+          stabilizeLeftStep: 1,
+          stabilizeRight: 0,
+          stabilizeRightColor: 'rgb(0, 188, 212)',
+          stabilizeRightStep: 1
+        },
+        processButton: false,
+        stepIndex: 0
+      }
     default:
       return state
   }

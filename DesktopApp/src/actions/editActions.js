@@ -6,6 +6,12 @@ export function toggleDialog (toggle) {
   }
 }
 
+export function reset () {
+  return {
+    type: types.EDITRESET
+  }
+}
+
 export function directorySelect ({ path }) {
   return {
     type: types.DIRECTORYSELECT,

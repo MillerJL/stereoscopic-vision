@@ -42,6 +42,11 @@ export default function file (state = initialState, action = {}) {
           ...rightFileList.slice(payload.file + 1, rightFileList.length)
         ]
       }
+    case types.FILERESET:
+      return {
+        leftFileList: [],
+        rightFileList: []
+      }
     default:
       return state
   }

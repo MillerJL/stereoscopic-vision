@@ -26,6 +26,13 @@ export default function edit (state = initialState, action = {}) {
         ...state,
         fileName: action.payload.fileName
       }
+    case types.EDITRESET:
+      return {
+        dialogOpen: false,
+        fileName: 'output_name.mp4',
+        directory: remote.app.getPath('documents') || 'Download Directory',
+        tempDirectory: os.tmpDir()
+      }
     default:
       return state
   }

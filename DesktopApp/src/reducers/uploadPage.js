@@ -31,6 +31,19 @@ export default function uploadPage (state = initialState, action = {}) {
           disabled: payload.disabled
         }
       }
+    case types.UPLOADPAGERESET:
+      return {
+        stepper: 0,
+        uploadStep: {
+          disabled: false
+        },
+        editStep: {
+          disabled: false
+        },
+        processStep: {
+          disabled: false
+        }
+      }
     default:
       return state
   }

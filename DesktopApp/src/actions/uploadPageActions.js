@@ -26,3 +26,9 @@ export function toggleProcessStep ({ disabled }) {
     }
   }
 }
+
+export function reset () {
+  return {
+    type: types.UPLOADPAGERESET
+  }
+}

@@ -26,15 +26,12 @@ function getVideoDuration ({ filePath }) {
   })
 }
 
-// 18553418184
-
 export function validateAddFile ({ files, side }) {
   return (dispatch, getState) => {
     let errors = []
 
     files.forEach(file => {
       let error = []
-      console.log(electronFs.statSync(file.path))
       const payload = {
         name: file.name,
         path: file.path,
@@ -70,9 +67,6 @@ export function validateAddFile ({ files, side }) {
           file: file.name
         })
       }
-
-      console.log(payload.size)
-      console.log(maxFileSize)
 
       if (!error.length) dispatch(addFile({ file, side, payload }))
       else errors.push(...error)
@@ -154,5 +148,11 @@ export function validateFileState () {
         dispatch(toggleEditStep({ disabled: true }))
       }
     }
+  }
+}
+
+export function reset () {
+  return {
+    type: types.FILERESET
   }
 }

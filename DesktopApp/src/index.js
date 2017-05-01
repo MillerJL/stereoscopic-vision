@@ -12,6 +12,7 @@ import Upload from './containers/Upload'
 import Edit from './containers/Edit'
 import App from './containers/App'
 import Process from './containers/Process'
+import Review from './containers/Review'
 import * as reducers from './reducers'
 
 import 'material-design-lite/src/typography/_typography.scss'
@@ -34,6 +35,7 @@ render(
         <IndexRoute components={{ content: Upload }} />
         <Route path='edit' components={{ content: Edit }} />
         <Route path='process' components={{ content: Process }} />
+        <Route path='review' components={{ content: Review }} />
       </Route>
     </Router>
   </Provider>,

@@ -3,6 +3,9 @@ import * as types from './index'
 
 const remote = window.require('electron').remote
 const spawn = remote.require('child_process').spawn
+const electronFs = remote.require('fs')
+
+import { hashHistory } from 'react-router'
 
 export function updateProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
   return {
@@ -33,6 +36,12 @@ export function updateRightProgressBar ({ progress = 0, color = 'rgb(0, 188, 212
       color,
       step
     }
+  }
+}
+
+export function displayResetButton () {
+  return {
+    type: types.DISPLAYRESETBUTTON
   }
 }
 
@@ -71,6 +80,13 @@ function getTime ({ output }) {
 
 function preStabilize ({ vid, out, dispatch, bar }) {
   return new Promise((resolve, reject) => {
+    if (electronFs.existsSync(out)) {
+      electronFs.unlink(out, err => {
+        if (err) console.log(err)
+        return
+      })
+    }
+
     const stab = spawn('ffmpeg', [
       '-i',
       vid.path,
@@ -82,11 +98,11 @@ function preStabilize ({ vid, out, dispatch, bar }) {
     ])
 
     stab.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
+      // console.log(`stdout: ${data}`)
     })
 
     stab.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`)
+      // console.log(`stderr: ${data}`)
 
       let output = decodeOutput({ data })
 
@@ -98,7 +114,7 @@ function preStabilize ({ vid, out, dispatch, bar }) {
     })
 
     stab.on('close', (code) => {
-      console.log(code)
+      // console.log(code)
       dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
 
       resolve(out)
@@ -108,6 +124,13 @@ function preStabilize ({ vid, out, dispatch, bar }) {
 
 function stabilize ({ vid, trf, out, dispatch, bar }) {
   return new Promise((resolve, reject) => {
+    if (electronFs.existsSync(out)) {
+      electronFs.unlink(out, err => {
+        if (err) console.log(err)
+        return
+      })
+    }
+
     const stab = spawn('ffmpeg', [
       '-i',
       vid.path,
@@ -130,11 +153,11 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
     ])
 
     stab.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
+      // console.log(`stdout: ${data}`)
     })
 
     stab.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`)
+      // console.log(`stderr: ${data}`)
 
       let output = decodeOutput({ data })
 
@@ -146,11 +169,12 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
     })
 
     stab.on('close', (code) => {
-      console.log(code)
-      dispatch(bar({ progress: 100, color: '#8BC34A' }))
+      // console.log(code)
+      dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
 
       resolve({
         path: out,
+        trf,
         duration: vid.duration,
         name: vid.name
       })
@@ -171,11 +195,11 @@ function combineVideos ({ leftVideo, rightVideo, out, dispatch, bar }) {
     ])
 
     ls.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
+      // console.log(`stdout: ${data}`)
     })
 
     ls.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`)
+      // console.log(`stderr: ${data}`)
       let output = decodeOutput({ data })
 
       if (output.includes('frame= ')) {
@@ -186,9 +210,24 @@ function combineVideos ({ leftVideo, rightVideo, out, dispatch, bar }) {
     })
 
     ls.on('close', (code) => {
-      console.log(`child process exited with code ${code}`)
+      // console.log(`child process exited with code ${code}`)
 
       dispatch(updateProgressBar({ progress: 100, color: '#8BC34A' }))
+      resolve(out)
+    })
+  })
+}
+
+function cleanup ({ file }) {
+  return new Promise((resolve, reject) => {
+    electronFs.unlink(file.path, err => {
+      if (err) reject(err)
+      else {
+        electronFs.unlink(file.trf, err => {
+          if (err) reject(err)
+          else resolve(null)
+        })
+      }
     })
   })
 }
@@ -211,31 +250,33 @@ export function process ({ tmpDir }) {
       })[0]
     }
 
+    let temp = remote.app.getPath('temp').replace(/C:\\/g, '/').replace(/\\/g, '/')
+
     let stabVideos = [
       preStabilize({
         vid: files.leftVideo,
-        out: '/tmp/preStabLeft.trf',
+        out: path.join(temp, 'preStabLeft.trf'),
         dispatch,
         bar: updateLeftProgressBar
       }).then(trf => {
         return stabilize({
           vid: files.leftVideo,
           trf,
-          out: '/tmp/stabLeft.mp4',
+          out: path.join(temp, 'stabLeft.mp4'),
           dispatch,
           bar: updateLeftProgressBar
         })
       }),
       preStabilize({
         vid: files.rightVideo,
-        out: '/tmp/preStabRight.trf',
+        out: path.join(temp, 'preStabRight.trf'),
         dispatch,
         bar: updateRightProgressBar
       }).then(trf => {
         return stabilize({
           vid: files.rightVideo,
           trf,
-          out: '/tmp/stabRight.mp4',
+          out: path.join(temp, 'stabRight.mp4'),
           dispatch,
           bar: updateRightProgressBar
         })
@@ -243,14 +284,24 @@ export function process ({ tmpDir }) {
     ]
 
     let results = await Promise.all(stabVideos)
-    console.log(results)
-    let combVids = await combineVideos({
+    await combineVideos({
       leftVideo: results[0],
       rightVideo: results[1],
       out: path.join(edit.directory, edit.fileName),
       dispatch,
       bar: updateProgressBar
     })
-    console.log(combVids)
+    await Promise.all(results.map(file => {
+      return cleanup({
+        file
+      })
+    }))
+    hashHistory.push('/review')
+  }
+}
+
+export function reset () {
+  return {
+    type: types.PROCESSRESET
   }
 }
