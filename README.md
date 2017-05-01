@@ -5,18 +5,28 @@ CS461 Senior project
 Team 54
 ## Project Description
 ...
-## Instructions
-Required:
+## Dev Setup
+### Required:
 * Node 7.4.0
 * FFMPEG 8.1.0
 
-Steps:
+### Steps:
 * Clone Repo
 * npm install
 * npm start
 * npm run electron-dev
 
-Using the App:
+
+## Windows Application
+### Required:
+* FFMPEG 8.1.0
+
+### Steps:
+* Download windows.zip
+* Extract
+* Run Tutorial.exe
+
+## Using the App:
 * On the first screen add two valid video files, one for each side
 * Click the next arrow
 * Choose an output location for the final video
