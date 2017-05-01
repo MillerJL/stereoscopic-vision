@@ -15,8 +15,6 @@ import Process from './containers/Process'
 import Review from './containers/Review'
 import * as reducers from './reducers'
 
-import 'material-design-lite/src/typography/_typography.scss'
-
 injectTapEventPlugin()
 
 const middleware = [thunk]
