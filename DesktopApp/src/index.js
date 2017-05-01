@@ -13,6 +13,9 @@ import Edit from './containers/Edit'
 import App from './containers/App'
 import Process from './containers/Process'
 import * as reducers from './reducers'
+
+import 'material-design-lite/src/typography/_typography.scss'
+
 injectTapEventPlugin()
 
 const middleware = [thunk]

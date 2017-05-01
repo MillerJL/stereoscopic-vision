@@ -14,22 +14,24 @@ export function updateProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' })
   }
 }
 
-export function updateLeftProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
+export function updateLeftProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)', step = 1 }) {
   return {
     type: types.UPDATELEFTPROGRESSBAR,
     payload: {
       progress,
-      color
+      color,
+      step
     }
   }
 }
 
-export function updateRightProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)' }) {
+export function updateRightProgressBar ({ progress = 0, color = 'rgb(0, 188, 212)', step = 1 }) {
   return {
     type: types.UPDATERIGHTPROGRESSBAR,
     payload: {
       progress,
-      color
+      color,
+      step
     }
   }
 }
@@ -97,7 +99,7 @@ function preStabilize ({ vid, out, dispatch, bar }) {
 
     stab.on('close', (code) => {
       console.log(code)
-      dispatch(bar({ progress: 100, color: '#8BC34A' }))
+      dispatch(bar({ progress: 100, color: '#8BC34A', step: 2 }))
 
       resolve(out)
     })
@@ -139,7 +141,7 @@ function stabilize ({ vid, trf, out, dispatch, bar }) {
       if (output.includes('frame= ')) {
         let progress = parseInt((getTime({ output }) / vid.duration) * 100, 10)
 
-        dispatch(bar({ progress }))
+        dispatch(bar({ progress, step: 2 }))
       }
     })
 
@@ -191,7 +193,7 @@ function combineVideos ({ leftVideo, rightVideo, out, dispatch, bar }) {
   })
 }
 
-export function process () {
+export function process ({ tmpDir }) {
   return async (dispatch, getState) => {
     let {
       file,

@@ -5,8 +5,6 @@ const path = require('path')
 const url = require('url')
 const dialog = electron.dialog
 
-// console.log(app.getPath('documents'))
-
 let mainWindow
 
 function createWindow () {
@@ -22,8 +20,6 @@ function createWindow () {
   })
 
   mainWindow.loadURL(startUrl)
-
-  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
     mainWindow = null
