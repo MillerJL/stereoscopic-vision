@@ -8,6 +8,7 @@ Team 54
 ## Instructions
 Required:
 * Node 7.4.0
+* FFMPEG 8.1.0
 
 Steps:
 * Clone Repo
