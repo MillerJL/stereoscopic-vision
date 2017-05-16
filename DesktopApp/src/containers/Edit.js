@@ -52,10 +52,9 @@ class Edit extends Component {
           />
         </Paper>
 
-        {/*
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-          </div>
-        */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+        </div>
 
         <div
           style={{
